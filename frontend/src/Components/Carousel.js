@@ -7,7 +7,7 @@ function CarouselCustom(){
 return (
     <MDBCarousel showIndicators showControls fade>
     <MDBCarouselItem itemId={1}>
-      <img src={img1} className='d-block w-100 'style={{ height: '700px', objectFit: 'cover'}} alt='...' />
+      <img src={img1} className='d-block w-100 'style={{ height: '400px', objectFit: 'cover'}} alt='...' />
       <MDBCarouselCaption>
         <h2 style={{ fontSize: '2rem', color: '#000' }}>First slide label</h2>
         <h5 style={{ fontSize: '1.5rem', color: '#000' }}>Nulla vitae elit libero, a pharetra augue mollis interdum.</h5>
@@ -15,7 +15,7 @@ return (
     </MDBCarouselItem>
 
     <MDBCarouselItem itemId={2}>
-      <img src={img2} className='d-block w-100'style={{ height: '800px', objectFit: 'cover' }} alt='...' />
+      <img src={img2} className='d-block w-100'style={{ height: '400px', objectFit: 'cover' }} alt='...' />
       <MDBCarouselCaption>
         <h2 style={{ fontSize: '2rem', color: '#000' }}>Second slide label</h2>
         <h5 style={{ fontSize: '1.5rem', color: '#000' }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h5>
@@ -23,7 +23,7 @@ return (
     </MDBCarouselItem>
 
     <MDBCarouselItem itemId={3}>
-      <img src={img3} className='d-block w-100' style={{ height: '700px', objectFit: 'cover' }} alt='...' />
+      <img src={img3} className='d-block w-100' style={{ height: '400px', objectFit: 'cover' }} alt='...' />
       <MDBCarouselCaption>
         <h2 style={{ fontSize: '2rem', color: '#000' }}>Third slide label</h2>
         <h5 style={{ fontSize: '1.5rem', color: '#000' }}>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</h5>
