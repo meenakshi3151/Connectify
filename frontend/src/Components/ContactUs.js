@@ -3,9 +3,17 @@ import "../App.css";
 import "tailwindcss/tailwind.css";
 import ContactImage from "../images/contact.jpg"
 export default function ContactUs() {
+    const sectionStyle = {
+        backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url(${ContactImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+    };
+    
+
     return (
+
         <div>
-            <section className="text-gray-700 body-font relative" style={{ backgroundImage: `url(${ContactImage})` }}
+            <section className="text-gray-700 body-font relative" style={sectionStyle} 
 >
                 <div className="container px-5 py-24 mx-auto">
                     <div className="flex flex-col text-center w-full mb-12">
