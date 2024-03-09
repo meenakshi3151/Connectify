@@ -20,7 +20,7 @@ function NavBar() {
    const [btntext, setbtntext] = useState("Enable Dark mode");
 
   const toggleStyle =  () =>{
-         if(myStyle.color == '#222'){
+         if(myStyle.color === '#222'){
               setmyStyle({
                  color: 'white',
                  backgroundColor : '#222',
