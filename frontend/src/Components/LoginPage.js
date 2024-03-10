@@ -18,8 +18,7 @@ function LoginPage(props) {
         background:'linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))',
     }
 
-    
-    
+  
   return (
     <BrowserRouter>
     <MDBContainer fluid   style={backgroundStyle} id = "login">
@@ -30,7 +29,7 @@ function LoginPage(props) {
           <MDBCard className='bg-dark text-white my-5 mx-auto' style={{borderRadius: '1rem', maxWidth: '400px'}}>
             <MDBCardBody className='p-5 d-flex flex-column align-items-center mx-auto w-100'>
 
-              <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
+              <h2 className="fw-bold mb-2 text-uppercase ">Login</h2>
               <p className="text-white-50 mb-5">Please enter your login and password!</p>
               <label style={{marginRight: "12rem"}}>Email address</label>
               <MDBInput wrapperClass='mb-4 mx-5 w-100' labelClass='text-white'  id='formControlLg' type='email' size="lg"/>
@@ -38,7 +37,7 @@ function LoginPage(props) {
               <MDBInput wrapperClass='mb-4 mx-5 w-100' labelClass='text-white'  id='formControlLg' type='password' size="lg"/>
 
               <p className="small mb-3 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
-              <button type="button" class="btn btn-primary" style={{ padding: "15px 35px", fontSize:"18px"}}>Login</button>
+              <button type="button" class="btn btn-primary"  style={{ padding: "15px 35px", fontSize:"18px", marginLeft:"80px"}}>Login</button>
 
               <div className='d-flex flex-row mt-3 mb-5'>
                 <MDBBtn tag='a' color='none' className='m-3' style={{ color: 'white' }}>
