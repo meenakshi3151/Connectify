@@ -1,12 +1,14 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const Connection = require('./db.js');
-
+const emailRoutes = require("./routes/emailRoutes");
 const cors = require('cors');
 
 dotenv.config();
 
 const app=express();
+app.use(cors());
+app.use(express.json());
 const allowedOrigins = [
     'http://localhost:3000', 
   ];
@@ -21,7 +23,7 @@ const allowedOrigins = [
   };
  
   app.use(cors(corsOptions));
-
+  app.use("/email", emailRoutes);
 const PORT = 8000;
 app.listen(PORT, () => console.log(`Server is running successfully on PORT ${PORT}`));
 

@@ -1,7 +1,7 @@
-const { createTransport } = require('nodemailer');
+const nodemailer = require('nodemailer');
 const expressAsyncHandler = require("express-async-handler");
 const dotenv = require("dotenv");
-
+dotenv.config();
 const transporter = createTransport({
     host: process.env.SMTP_HOST,
     port: process.env.SMTP_PORT,
@@ -28,7 +28,7 @@ const sendEmail = expressAsyncHandler(async (req, res) => {
         " - " +
         message,
     };
-})
+
 
 transporter.sendMail(mailOptions, function(error, info){
     if (error) {
@@ -37,3 +37,31 @@ transporter.sendMail(mailOptions, function(error, info){
         console.log( info.response);
     }
 });
+});
+
+const mailSender = async (email, title, body) => {
+    try {
+      // Create a Transporter to send emails
+      let transporter = nodemailer.createTransport({
+        host: process.env.SMTP_HOST,
+        port:process.env.SMTP_PORT,
+        auth: {
+          user: process.env.SMTP_MAIL,
+          pass: process.env.SMTP_PASSWORD,
+        }
+      });
+      // Send emails to users
+      let info = await transporter.sendMail({
+        from: 'MEENAKSHI',
+        to: email,
+        subject: title,
+        html: body,
+      });
+      console.log("Email info: ", info);
+      return info;
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  module.exports = { sendEmail ,mailSender};
