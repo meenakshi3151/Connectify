@@ -2,7 +2,8 @@ const nodemailer = require('nodemailer');
 const expressAsyncHandler = require("express-async-handler");
 const dotenv = require("dotenv");
 dotenv.config();
-const transporter = createTransport({
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: process.env.SMTP_PORT,
     secure: false,
@@ -13,6 +14,7 @@ const transporter = createTransport({
 });
 
 const sendEmail = expressAsyncHandler(async (req, res) => {
+    
     const { name, email, message } = req.body;
     console.log(name, email, message);
   
@@ -32,6 +34,8 @@ const sendEmail = expressAsyncHandler(async (req, res) => {
 
 transporter.sendMail(mailOptions, function(error, info){
     if (error) {
+      res.status(400);
+      throw new Error(error);
         console.log(error);
     } else {
         console.log( info.response);
@@ -39,29 +43,4 @@ transporter.sendMail(mailOptions, function(error, info){
 });
 });
 
-const mailSender = async (email, title, body) => {
-    try {
-      // Create a Transporter to send emails
-      let transporter = nodemailer.createTransport({
-        host: process.env.SMTP_HOST,
-        port:process.env.SMTP_PORT,
-        auth: {
-          user: process.env.SMTP_MAIL,
-          pass: process.env.SMTP_PASSWORD,
-        }
-      });
-      // Send emails to users
-      let info = await transporter.sendMail({
-        from: 'MEENAKSHI',
-        to: email,
-        subject: title,
-        html: body,
-      });
-      console.log("Email info: ", info);
-      return info;
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
-  module.exports = { sendEmail ,mailSender};
+module.exports = { sendEmail };

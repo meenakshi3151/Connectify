@@ -24,7 +24,7 @@ const allowedOrigins = [
  
   app.use(cors(corsOptions));
   app.use("/email", emailRoutes);
-const PORT = 8000;
-app.listen(PORT, () => console.log(`Server is running successfully on PORT ${PORT}`));
+
+app.listen( ()=> console.log(`Server is running successfully on PORT ${process.env.PORT}`));
 
 Connection();
