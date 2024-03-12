@@ -14,6 +14,9 @@ import {BrowserRouter} from "react-router-dom";
 import { HashLink as Link} from 'react-router-hash-link';
 
 function LoginPage(props) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
     const backgroundStyle = {
         background:'linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))',
     }
@@ -32,12 +35,12 @@ function LoginPage(props) {
               <h2 className="fw-bold mb-2 text-uppercase ">Login</h2>
               <p className="text-white-50 mb-5">Please enter your login and password!</p>
               <label style={{marginRight: "12rem"}}>Email address</label>
-              <MDBInput wrapperClass='mb-4 mx-5 w-100' labelClass='text-white'  id='formControlLg' type='email' size="lg"/>
+              <MDBInput wrapperClass='mb-4 mx-5 w-100' labelClass='text-white'  id='formControlLg' type='email' size="lg" onChange={(e)=>{setEmail(e.target.value)}}/>
               <label style={{marginRight : "14rem"}}>Password</label>
-              <MDBInput wrapperClass='mb-4 mx-5 w-100' labelClass='text-white'  id='formControlLg' type='password' size="lg"/>
+              <MDBInput wrapperClass='mb-4 mx-5 w-100' labelClass='text-white'  id='formControlLg' onClick={(e)=>{setPassword(e.target.value)}} type='password' size="lg" />
 
               <p className="small mb-3 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
-              <button type="button" class="btn btn-primary"  style={{ padding: "15px 35px", fontSize:"18px", marginLeft:"80px"}}>Login</button>
+              <button type="button" class="btn btn-primary"  style={{ padding: "15px 35px", fontSize:"18px", marginLeft:"80px"}} onClick={handleLoginClick}>Login</button>
 
               <div className='d-flex flex-row mt-3 mb-5'>
                 <MDBBtn tag='a' color='none' className='m-3' style={{ color: 'white' }}>
