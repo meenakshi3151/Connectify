@@ -28,14 +28,13 @@
 //   app.use(cors(corsOptions));
 //   app.use(express.json());
 //   app.use("/",checkRoutes);
-//   app.listen( ()=> console.log(`Server is running successfully on PORT ${process.env.PORT}`));
- 
- 
+//   app.listen( ()=> console.log(`Server is running successfully on PORT ${process.env.PORT}`)); 
+
+
 const express = require('express');
 const dotenv = require('dotenv');
 const Connection = require('./db');
 const cors = require('cors');
-const checkRoutes = require("./routes/checkRoutes");
 const emailRoutes = require("./routes/emailRoutes");
 const userRoutes = require("./routes/userRoutes");
 dotenv.config();
@@ -44,7 +43,7 @@ Connection();
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use("/", checkRoutes);
+
 
 app.use("/",emailRoutes)
 app.use("/", userRoutes);
