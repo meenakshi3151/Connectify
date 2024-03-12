@@ -1,4 +1,7 @@
 import React from 'react';
+import { useState } from 'react';
+import { useToast } from '@chakra-ui/toast';
+import axios from 'axios';
 import {
   MDBBtn,
   MDBContainer,
@@ -13,10 +16,72 @@ from 'mdb-react-ui-kit';
 import {BrowserRouter} from "react-router-dom";
 import { HashLink as Link} from 'react-router-hash-link';
 
+
 function LoginPage(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const toast=useToast();
+const handleLoginClick = async (e) => {
+  e.preventDefault();
+  if(email==='' || password===''){
+    toast({
+      title: "Please Fill all the Fields",
+      status: "warning",
+      duration: 5000,
+      isClosable: true,
+      position: "bottom",
+    })
+    return;
+  }
+  try {
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+    const response = await axios.post(
+      "http://localhost:5000/authUser",
+      {
+        email,
+        password,
+     },
+      config
+    );
 
+    if (response.data) {
+      // Check if the 'data' property is available in the response
+      const data = response.data;
+      toast({
+        title: "Login Successful",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+    //  navigate('/authUser')
+    } else {
+      
+      toast({
+        title: "Error Occured: No Data in Response",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+    }
+
+  } catch (error) {
+    console.log(error);
+    toast({
+      title: "Error Occured!",
+      description: error.response?.data?.message || "An error occurred",
+      status: "error",
+      duration: 5000,
+      isClosable: true,
+      position: "bottom",
+    });
+  }
+}
     const backgroundStyle = {
         background:'linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))',
     }
