@@ -1,44 +1,43 @@
 const asyncHandler = require("express-async-handler");
-const User = require("../models/userModel");
-const Admin=require("..models/adminModel")
-const OTP=require("../models/otpModel");
-const bcrypt = require('bcryptjs');
+const User = require("../schemas/userModel");
+const Admin = require("../schemas/adminModel")
 
 //register the user(role)
-const registerUser=asyncHandler(async(req,res)=>{
-    const {name,email,phone,password}=req.body;
-    if(!name || !email || !password || ![phone]){
+const registerUser = asyncHandler(async (req, res) => {
+    const { name, email, phone, password } = req.body;
+    if (!name || !email || !password || !phone) {
         res.status(400)
-        throw new error("Plaease enter all the fields")
+        throw new Error("Please enter all the fields")
     }
-    const existinUser=await User.findOne({email});
-    const existinAdmin=await Admin.findOne({email});
-    if(existAdmin){
+
+    const existinUser = await User.findOne({ email });
+    const existinAdmin = await Admin.findOne({ email });
+    if (existinAdmin) {
         res.status(400);
         throw new Error("User already exists ");
     }
-    if(existinUser){
+    if (existinUser) {
         res.status(400);
         throw new Error("User already exists ");
     }
-    const user=await User.create({
+    const user = await User.create({
         name,
         phone,
         password,
         email
     });
-    if(user){
+    if (user) {
         res.status(201).json({
             _id: user._id,
             name: user.name,
             email: user.email,
-            phone:user.phone,
-            
-          });
+            phone: user.phone,
+
+        });
     }
-    else{
+    else {
         res.status(400);
-        throw new Error("User not found");
+        throw new Error("User not created");
     }
-})
-module.exports = registerUser;
+});
+module.exports = {registerUser};

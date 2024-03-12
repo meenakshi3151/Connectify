@@ -1,8 +1,8 @@
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 const expressAsyncHandler = require("express-async-handler");
 const dotenv = require("dotenv");
 dotenv.config();
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
 const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: process.env.SMTP_PORT,
@@ -18,7 +18,7 @@ const sendEmail = expressAsyncHandler(async (req, res) => {
     const { name, email, message } = req.body;
     console.log(name, email, message);
   
-    var mailOptions = {
+    var mailOption = {
       from: email,
       to: process.env.TO_MAIL,
       subject: "Query from " + name,
@@ -32,7 +32,7 @@ const sendEmail = expressAsyncHandler(async (req, res) => {
     };
 
 
-transporter.sendMail(mailOptions, function(error, info){
+transporter.sendMail(mailOption, function(error, info){
     if (error) {
       res.status(400);
       throw new Error(error);
