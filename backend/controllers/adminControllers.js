@@ -4,12 +4,13 @@ const Admin=require("..models/adminModel")
 const OTP=require("../models/otpModel");
 const bcrypt = require('bcryptjs');
 
-//register the user(role)
-const registerUser=asyncHandler(async(req,res)=>{
-    const {name,email,phone,password}=req.body;
-    if(!name || !email || !password || ![phone]){
+//register the admin(role)
+const registerAdmin=asyncHandler(async(req,res)=>{
+    const {name,email,phone,password,
+    comapny,position}=req.body;
+    if(!name || !email || !password || !phone || !company || !position){
         res.status(400)
-        throw new error("Plaease enter all the fields")
+        throw new error("Please enter all the fields")
     }
     const existinUser=await User.findOne({email});
     const existinAdmin=await Admin.findOne({email});
@@ -21,18 +22,23 @@ const registerUser=asyncHandler(async(req,res)=>{
         res.status(400);
         throw new Error("User already exists ");
     }
-    const user=await User.create({
+    const admin=await User.create({
         name,
         phone,
         password,
-        email
+        email,
+        company,
+        position
     });
-    if(user){
+
+    if(admin){
         res.status(201).json({
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            phone:user.phone,
+            _id: admin._id,
+            name: admin.name,
+            email: admin.email,
+            phone: admin.phone,
+            comapny: admin.comapny,
+            position: admin.position
 
           });
     }
@@ -41,4 +47,4 @@ const registerUser=asyncHandler(async(req,res)=>{
         throw new Error("User not found");
     }
 })
-module.exports = registerUser;
+module.exports = registerAdmin;

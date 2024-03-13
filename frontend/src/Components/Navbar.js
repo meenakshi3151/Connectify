@@ -25,7 +25,7 @@ function NavBar() {
                  color: 'white',
                  backgroundColor : '#222',
                  transition: 'all 0.3s ease',
-                
+              
               })
                
               setbtntext("Enable Light mode")

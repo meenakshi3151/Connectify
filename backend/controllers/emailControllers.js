@@ -12,22 +12,24 @@ const transporter = createTransport({
     },
 });
 
+var mailOptions = {
+    from: email,
+    to: process.env.TO_MAIL,
+    subject: "Query from " + name,
+    text:
+      "Received a query from " +
+      name +
+      " with email id " +
+      email +
+      " - " +
+      message,
+  };
+  
 const sendEmail = expressAsyncHandler(async (req, res) => {
     const { name, email, message } = req.body;
     console.log(name, email, message);
   
-    var mailOptions = {
-      from: email,
-      to: process.env.TO_MAIL,
-      subject: "Query from " + name,
-      text:
-        "Received a query from " +
-        name +
-        " with email id " +
-        email +
-        " - " +
-        message,
-    };
+
 })
 
 transporter.sendMail(mailOptions, function(error, info){

@@ -8,6 +8,8 @@ import AboutUs from "../Components/AboutUs";
 import Footer from "../Components/Footer";
 import LoginPage from "../Components/LoginPage";
 import SignUp from "../Components/Signup";
+import Profile from "../Components/Profile";
+
 function Homepage() {
         const [loginForm, setLoginForm] = useState(true)
 
@@ -24,6 +26,7 @@ function Homepage() {
                  }
                <AboutUs/>
                <ContactUs/>
+                <Profile/>
                <Footer/>
         </>
         );
