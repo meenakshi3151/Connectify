@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useToast } from '@chakra-ui/toast';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import {
   MDBBtn,
@@ -18,6 +19,7 @@ import { HashLink as Link} from 'react-router-hash-link';
 
 
 function LoginPage(props) {
+// const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const toast=useToast();
@@ -47,10 +49,9 @@ const handleLoginClick = async (e) => {
      },
       config
     );
-
-    if (response.data) {
-      // Check if the 'data' property is available in the response
-      const data = response.data;
+   
+    if(response.data){ 
+    //  console.log("hi");
       toast({
         title: "Login Successful",
         status: "success",
@@ -59,22 +60,15 @@ const handleLoginClick = async (e) => {
         position: "bottom",
       });
     //  navigate('/authUser')
-    } else {
-      
-      toast({
-        title: "Error Occured: No Data in Response",
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-        position: "bottom",
-      });
+    localStorage.setItem("userInfo", JSON.stringify(response.data));
+    // navigate('/dashboard');
     }
-
-  } catch (error) {
+  } 
+  catch (error) {
     console.log(error);
     toast({
-      title: "Error Occured!",
-      description: error.response?.data?.message || "An error occurred",
+      title: "Error Occured",
+      description: error.response.data.message,
       status: "error",
       duration: 5000,
       isClosable: true,

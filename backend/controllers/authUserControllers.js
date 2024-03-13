@@ -13,8 +13,7 @@ const user = await User.findOne({ email });
         phone:user.phone,
         
       });
-    } else {
-        //if not in user find in admin 
+    } else { 
         const user = await Admin.findOne({ email });
         
         if (user && (await user.matchPassword(password))) {

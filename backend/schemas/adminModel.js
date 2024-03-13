@@ -50,7 +50,10 @@ const adminSchema=mongoose.Schema(
          role:{
             type:String,
             default: "admin"
-         }
+         },
+         notifications:{
+          type:Array
+        }
 
     }
 )
