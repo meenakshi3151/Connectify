@@ -31,7 +31,7 @@ const toast=useToast();
   const [company,setCompany]=useState('');
   const [position,setPosition]=useState('');
   const [confirmPassword,setConfirmPassword]=useState('');
-// const navigate=useNavigate();
+ const navigate=useNavigate();
   const handleSignUpAdminClick=async (e)=>{
     e.preventDefault();
     if(email==='' || name==='' || phone==='' || password==='' || company==='' || position==='' || confirmPassword===''){
@@ -99,7 +99,7 @@ const toast=useToast();
           isClosable: true,
           position: "bottom",
         });
-     //   navigate('/authUser')
+      navigate('/authUser')
       } else {
         // Handle the case where the response does not contain 'data'
         toast({
@@ -131,7 +131,7 @@ const toast=useToast();
 
   
   return (
-    <BrowserRouter>
+  
     <MDBContainer fluid  className='p-4 background-radial-gradient overflow-hidden' id = "signup">
 
       <MDBRow>
@@ -222,7 +222,7 @@ const toast=useToast();
       </MDBRow>
 
     </MDBContainer>
-    </BrowserRouter>
+    
   );
 }
 

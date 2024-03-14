@@ -26,7 +26,7 @@ function SignUpUser(props) {
   const [password,setPassword]=useState('');
 
   const [confirmPassword,setConfirmPassword]=useState('');
- // const navigate=useNavigate();
+  const navigate=useNavigate();
   const toast=useToast();
   const handleSignUpUserClick=async (e)=>{
     e.preventDefault();
@@ -94,7 +94,7 @@ function SignUpUser(props) {
           isClosable: true,
           position: "bottom",
         });
-      //  navigate('/authUser')
+        navigate('/authUser')
       } else {
         
         toast({
@@ -124,7 +124,7 @@ function SignUpUser(props) {
     }
 
     return (
-    <BrowserRouter>
+   
     <MDBContainer fluid  className='p-4 background-radial-gradient overflow-hidden' id = "signup">
     <MDBRow>
 
@@ -212,7 +212,7 @@ function SignUpUser(props) {
       </MDBRow>
 
     </MDBContainer>
-    </BrowserRouter>
+   
   );
 }
 

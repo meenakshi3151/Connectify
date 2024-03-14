@@ -1,11 +1,14 @@
 import React from "react";
-
-function Notifications() {
+import NavbarDash from "./NavbarDash";
+function NotificationsPage() {
     return (
       <>
+      
+        <NavbarDash/>
       <h1>Notifications</h1>
+
       </>
 
     )
 }
-export default Notifications;
+export default NotificationsPage;

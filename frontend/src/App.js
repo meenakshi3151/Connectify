@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Switch } from 'react-router-dom';
+
 import './App.css';
 import HomePage from './Pages/HomePage';
 import Dashboard from './Pages/Dashboard';
 import Notify from './Pages/Notify';
-
+import LoginPage from './Components/LoginPage';
 function App() {
   return (
     // <Router>
@@ -22,12 +22,20 @@ function App() {
   //     </Routes>
   //   {/* </div> */}
   // </Router>
-    <>
-    <Notify/>
-    <Dashboard/>
+    // <>
+    // <Notify/>
+    // <Dashboard/>
   
-    <HomePage/>
-     </>
+    // <HomePage/>
+    //  </>
+    <Router>
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/" element={<HomePage/>}/>
+      {/* Other routes */}
+    </Routes>
+  </Router>
   );
 }
 

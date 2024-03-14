@@ -1,6 +1,6 @@
 import React from "react";
 import '../App.css';
-
+import NavbarDash from "./NavbarDash";
 function Profile() {
   return (
     <section className="h-100 gradient-custom-2">

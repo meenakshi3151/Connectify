@@ -19,7 +19,7 @@ import { HashLink as Link} from 'react-router-hash-link';
 
 
 function LoginPage(props) {
-// const navigate = useNavigate();
+const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const toast=useToast();
@@ -61,7 +61,7 @@ const handleLoginClick = async (e) => {
       });
     //  navigate('/authUser')
     localStorage.setItem("userInfo", JSON.stringify(response.data));
-    // navigate('/dashboard');
+    navigate('/dashboard');
     }
   } 
   catch (error) {
@@ -82,7 +82,7 @@ const handleLoginClick = async (e) => {
 
   
   return (
-    <BrowserRouter>
+   
     <MDBContainer fluid   style={backgroundStyle} id = "login">
 
       <MDBRow className='d-flex justify-content-center align-items-center h-100' >
@@ -128,7 +128,7 @@ const handleLoginClick = async (e) => {
       </MDBRow>
 
     </MDBContainer>
-    </BrowserRouter>
+  
     
   );
 }

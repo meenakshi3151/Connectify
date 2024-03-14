@@ -43,7 +43,7 @@ function NavBar() {
   
  
   return (
-    <BrowserRouter >
+  
     <Navbar expand="lg"   style={myStyle}>
       <Container fluid >
         <Navbar.Brand href="#" style={myStyle}>Connectify</Navbar.Brand>
@@ -86,7 +86,7 @@ function NavBar() {
         </Navbar.Collapse>
       </Container>
     </Navbar>
-    </BrowserRouter>
+   
   );
 }
 

@@ -43,7 +43,7 @@ function NavbarDash() {
   
  
   return (
-    <BrowserRouter >
+  
     <Navbar expand="lg"   style={myStyle}>
       <Container fluid >
         <Navbar.Brand href="#" style={myStyle}>Connectify</Navbar.Brand>
@@ -55,15 +55,15 @@ function NavbarDash() {
             navbarScroll
           >
             <Nav.Link href="#action1" style={myStyle}>Explore</Nav.Link>
-            <Link to ="#about">
-            <Nav.Link href="AboutUs.js" style={myStyle}>Notifications</Nav.Link>
+            <Link to ="/notifications">
+            <Nav.Link href="NotificationPage.js" style={myStyle}>Notifications</Nav.Link>
             </Link>
             <Link to ="#about">
             <Nav.Link href="AboutUs.js" style={myStyle}>Add</Nav.Link>
             </Link>
             
-            <Link to = "#contact">
-            <Nav.Link href="ContactUs.js" style={myStyle}>Your Profile</Nav.Link>
+            <Link to = "#">
+            <Nav.Link href="Dashboard.js" style={myStyle}>Your Profile</Nav.Link>
             </Link>
           </Nav>
           
@@ -74,7 +74,7 @@ function NavbarDash() {
         </Navbar.Collapse>
       </Container>
     </Navbar>
-    </BrowserRouter>
+   
   );
 }
 
