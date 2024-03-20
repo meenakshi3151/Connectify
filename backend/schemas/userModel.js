@@ -46,7 +46,23 @@ const userSchema = mongoose.Schema(
         },
         notifications:{
           type:Array
-        }
+        },
+        posts:{
+          type:Array
+        },
+        followers:{
+          type:Number,
+          default:0
+        },
+        following:{
+          type:Number,
+          default:0
+        },
+       postCount:{
+        type:Number,
+        default:0
+       }
+
     }
 );
 

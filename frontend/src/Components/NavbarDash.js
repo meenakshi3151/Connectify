@@ -1,15 +1,28 @@
 import React,{useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
+
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import {BrowserRouter} from "react-router-dom";
+import axios from 'axios';
+
 import { HashLink as Link} from 'react-router-hash-link';
-
-
+import {
+  Box, 
+  Drawer, 
+  DrawerBody, 
+  DrawerContent, 
+  DrawerHeader, 
+  DrawerOverlay, 
+  Input, 
+  Text, 
+  Tooltip,
+ 
+ } from "@chakra-ui/react";
+import { useDisclosure } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 function NavbarDash() {
+  const toast=useToast();
   const [myStyle,setmyStyle] = useState({
      color:'#222',
      backgroundColor: 'white',
@@ -17,6 +30,60 @@ function NavbarDash() {
      
   })
 
+
+  const [searchValue, setSearch] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+  
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    if (!searchValue) {
+      toast({
+        title: "Please Enter something in search",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom-right",
+      });
+      return;
+    }
+  
+    console.log("Search Value:", searchValue); // Add this line for debugging
+  
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+      const response = await axios.get(
+        "http://localhost:5000/registerUser",
+        {
+          params: { name: searchValue },
+        },
+        config
+      );
+  
+      if (response.data && response.data.length > 0) {
+        console.log("Users Found:", response.data); // Add this line for debugging
+      } else {
+        console.log("No users found"); // Add this line for debugging
+      }
+    } catch (error) {
+      console.log("Error:", error); // Add this line for debugging
+      toast({
+        title: "Error Occurred!",
+        description: error.response?.data?.message || "An error occurred",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+    }
+  };
+  
+  
+  const {isOpen, onOpen, onClose} = useDisclosure();
    const [btntext, setbtntext] = useState("Enable Dark mode");
 
   const toggleStyle =  () =>{
@@ -55,6 +122,9 @@ function NavbarDash() {
             navbarScroll
           >
             <Nav.Link href="#action1" style={myStyle}>Explore</Nav.Link>
+            {/* <Link to ="">
+            <Nav.Link href="NotificationPage.js" style={myStyle}>Search User</Nav.Link>
+            </Link> */}
             <Link to ="/notifications">
             <Nav.Link href="NotificationPage.js" style={myStyle}>Notifications</Nav.Link>
             </Link>
@@ -66,6 +136,35 @@ function NavbarDash() {
             <Nav.Link href="Dashboard.js" style={myStyle}>Your Profile</Nav.Link>
             </Link>
           </Nav>
+
+          <Tooltip label="Search Users to chat" hasArrow placement="bottom-end">
+          <Button variant="ghost" onClick={onOpen}>
+            <i className="fas fa-search"></i>
+            <Text d={{ base: "none", md: "flex"}} px={4} marginRight={0}>
+              Search User
+            </Text>
+          </Button>
+        </Tooltip>
+        <Drawer onClose={onClose} isOpen={isOpen}>
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerHeader borderBottomWidth="1px">Search Users</DrawerHeader>
+          <DrawerBody>
+            <Box display="flex" paddingBottom={2}>
+              <Input
+                placeholder="Search by name"
+                marginRight={2}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              <Button
+                onClick={handleSearch}
+               >Go
+               </Button>
+            </Box>
+          
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
           
           <button onClick = {toggleStyle} type="button" style = {{backgroundColor:"blue"}}class="btn btn-primary mx-4">{btntext}</button>
              <Link to = "#login">

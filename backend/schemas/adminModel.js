@@ -53,10 +53,32 @@ const adminSchema=mongoose.Schema(
          },
          notifications:{
           type:Array
-        }
+        },
+        posts:{
+          type:Array
+        },
+        followerCount:{
+          type:Number,
+          default:0
+        },
+        followingCount:{
+          type:Number,
+          default:0
+        },
+        postCount:{
+        type:Number,
+        default:0
+       },
+       followers:{
+        type:Array
+       },
+       following:{
+        type:Array
+       }
 
     }
 )
+
 adminSchema.methods.matchPassword = async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password);
   };
@@ -70,5 +92,9 @@ adminSchema.methods.matchPassword = async function (enteredPassword) {
     next();
   });
   
-  const Admin= mongoose.model("Admin", adminSchema);
+const Admin= mongoose.model("Admin", adminSchema);
 module.exports=Admin;
+
+
+
+

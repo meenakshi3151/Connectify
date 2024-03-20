@@ -14,7 +14,7 @@ import {
   MDBIcon
 }
 from 'mdb-react-ui-kit';
-import {BrowserRouter} from "react-router-dom";
+
 import { HashLink as Link} from 'react-router-hash-link';
 
 
