@@ -49,28 +49,35 @@ function NavbarDash() {
     }
   
     console.log("Search Value:", searchValue); // Add this line for debugging
-  
     try {
       const config = {
         headers: {
           "Content-type": "application/json",
         },
       };
-      const response = await axios.get(
-        "http://localhost:5000/registerUser",
-        {
-          params: { name: searchValue },
-        },
-        config
-      );
-  
-      if (response.data && response.data.length > 0) {
-        console.log("Users Found:", response.data); // Add this line for debugging
+    
+      const userResponse = await axios.get("http://localhost:5000/registerUser", {
+        params: { name: searchValue },
+        config,
+      });
+    
+      const adminResponse = await axios.get("http://localhost:5000/registerAdmin", {
+        params: { name: searchValue },
+        config,
+      });
+      if (userResponse.data && userResponse.data.length > 0) {
+        console.log("Users Found:", userResponse.data); 
       } else {
-        console.log("No users found"); // Add this line for debugging
+        console.log("No users found"); 
+      }
+    
+      if (adminResponse.data && adminResponse.data.length > 0) {
+        console.log("Admins Found:", adminResponse.data);
+      } else {
+        console.log("No admins found");
       }
     } catch (error) {
-      console.log("Error:", error); // Add this line for debugging
+      console.log("Error:", error); 
       toast({
         title: "Error Occurred!",
         description: error.response?.data?.message || "An error occurred",
@@ -80,10 +87,8 @@ function NavbarDash() {
         position: "bottom",
       });
     }
-  };
-  
-  
-  const {isOpen, onOpen, onClose} = useDisclosure();
+  };    
+   const {isOpen, onOpen, onClose} = useDisclosure();
    const [btntext, setbtntext] = useState("Enable Dark mode");
 
   const toggleStyle =  () =>{
@@ -122,9 +127,7 @@ function NavbarDash() {
             navbarScroll
           >
             <Nav.Link href="#action1" style={myStyle}>Explore</Nav.Link>
-            {/* <Link to ="">
-            <Nav.Link href="NotificationPage.js" style={myStyle}>Search User</Nav.Link>
-            </Link> */}
+            
             <Link to ="/notifications">
             <Nav.Link href="NotificationPage.js" style={myStyle}>Notifications</Nav.Link>
             </Link>
