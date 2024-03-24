@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import axios from 'axios';
+import SearchUserCard from './SearchUserCard';
 
 import { HashLink as Link} from 'react-router-hash-link';
 import {
@@ -15,12 +16,14 @@ import {
   DrawerHeader, 
   DrawerOverlay, 
   Input, 
+  Show, 
   Text, 
   Tooltip,
  
  } from "@chakra-ui/react";
 import { useDisclosure } from '@chakra-ui/react';
 import { useToast } from '@chakra-ui/react';
+
 function NavbarDash() {
   const toast=useToast();
   const [myStyle,setmyStyle] = useState({
@@ -76,7 +79,21 @@ function NavbarDash() {
       } else {
         console.log("No admins found");
       }
-    } catch (error) {
+      if(adminResponse.data.length === 0 && userResponse.data.length === 0){
+        toast({
+          title: "No User Found",
+          status: "warning",
+          duration: 5000,
+          isClosable: true,
+          position: "bottom-right",
+        });
+        return;
+      }
+      setSearchResults([...userResponse.data, ...adminResponse.data]);
+      
+      
+    } 
+    catch (error) {
       console.log("Error:", error); 
       toast({
         title: "Error Occurred!",
@@ -112,8 +129,10 @@ function NavbarDash() {
                 setbtntext("Enable Dark Mode")
               }
          }
-  
- 
+  // console.log(searchResults[0].name);
+ searchResults.map((result) => {
+  console.log('hi'+result.name);
+});
   return (
   
     <Navbar expand="lg"   style={myStyle}>
@@ -139,15 +158,21 @@ function NavbarDash() {
             <Nav.Link href="Dashboard.js" style={myStyle}>Your Profile</Nav.Link>
             </Link>
           </Nav>
-
+          
+          <div>
           <Tooltip label="Search Users to chat" hasArrow placement="bottom-end">
           <Button variant="ghost" onClick={onOpen}>
             <i className="fas fa-search"></i>
             <Text d={{ base: "none", md: "flex"}} px={4} marginRight={0}>
               Search User
             </Text>
+          
           </Button>
+         
         </Tooltip>
+       
+
+    </div>
         <Drawer onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent>
@@ -164,7 +189,15 @@ function NavbarDash() {
                >Go
                </Button>
             </Box>
-          
+            <div> 
+        
+        {
+          searchResults.map((result) => {
+            return <SearchUserCard name={result.name} />;
+          })
+        }
+        
+                </div>
           </DrawerBody>
         </DrawerContent>
       </Drawer>

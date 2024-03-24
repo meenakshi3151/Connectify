@@ -1,13 +1,13 @@
 import React from "react";
 import Profile from "../Components/Profile";
 import NavbarDash from "../Components/NavbarDash";
-import NotificationsPage from "../Components/Notifications";
+import SearchUserCard from "../Components/SearchUserCard";
 function Dashboard(){
     return (
         <>     
         <NavbarDash/>
         <Profile/>
-       
+  <SearchUserCard/>     
         
         </>
     )
