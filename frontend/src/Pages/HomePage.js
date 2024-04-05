@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import NavBar from "../Components/Navbar";
 import CarouselCustom from "../Components/Carousel";
 import Utility from "../Components/Utility";
 import ContactUs from "../Components/ContactUs";
@@ -8,13 +7,15 @@ import AboutUs from "../Components/AboutUs";
 import Footer from "../Components/Footer";
 import LoginPage from "../Components/LoginPage";
 import SignUp from "../Components/Signup";
-import Profile from "../Components/Profile";
+import Dashboard from "./Dashboard";
+import NavBar from "../Components/Navbar";
 
 function Homepage() {
         const [loginForm, setLoginForm] = useState(true)
 
         return(
         <>
+               
                <NavBar/>
                <CarouselCustom/>
                <Utility/>
@@ -26,7 +27,7 @@ function Homepage() {
                  }
                <AboutUs/>
                <ContactUs/>
-                <Profile/>
+                
                <Footer/>
         </>
         );

@@ -1,21 +1,20 @@
-.bg-body-tertiary-bg-primary{
-    background-color: #0762C8 /* Lighter shade of primary */
+/* .bg-body-tertiary-bg-primary{
+    background-color: #0762C8 
     
   }
   
 
   .cards-row{
     display: flex;
-    flex-wrap: wrap; /* Allows cards to wrap to the next line on smaller screens */
-    justify-content: space-around; /* Adjusts spacing around items */
+    flex-wrap: wrap; 
+    justify-content: space-around; 
     gap: 20px;
     flex-direction: row;
   }
   .custom-card{
-    width: 340px; /* Set your desired width */
-  height: 270px; /* Set your desired height */
-  margin: auto; /* Centers the card horizontally in its container */
-   /* or 'absolute', depending on how you want to position it */
+    width: 340px; 
+  height: 270px;
+  margin: auto; 
   top: 50px;
   }
 
@@ -80,15 +79,28 @@
   margin : '3px 2px';
 }
   
-/*profile css*/
-.gradient-custom-2 {
-  /* fallback for old browsers */
-  background: #fbc2eb;
-  
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1));
-  
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1))
-  }
-  
+.user-profile-navbar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+  background-color: #f8f9fa;
+}
+
+.navbar-items {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.navbar-item span {
+  display: none; 
+} 

@@ -1,0 +1,236 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.socialMediaSection h3,
+.socialMediaSection i {
+  color: #ffffff;
+}
+
+
+  .socialMediaSection {
+    display: flex;
+    justify-content: center; /* Center the icons horizontally */
+    align-items: center; /* Center the icons vertically */
+  }
+  
+
+.title {
+  color: white;
+  font-size: 100px; /* text-5xl equivalent */
+  padding-left: 12px; /* px-3 equivalent */
+  padding-bottom: 32px; /* pb-8 equivalent */
+} */
+
+/* This styles are to ensure that the footer remains at the bottom */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+#root { /* Assuming you're using Create React App which renders inside a div with id="root" */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.footer {
+  margin-top: auto; /* This pushes the footer to the bottom */
+  background-color: #333; /* Example background color */
+  color: white; /* Example text color */
+  text-align: center;
+  padding: 5px 0; /* Example padding */
+}
+
+.socialMediaSection h3, .socialMediaSection i {
+  margin: 0 10px; /* Example margin */
+
+}
+
+/* Adding some styles for the icons to make them look better */
+.fa-facebook-f, .fa-twitter, .fa-instagram {
+  cursor: pointer;
+  margin: 0 5px;
+  font-size: 20px;
+   /* Example size, adjust as needed */
+}
+
+/* You might need to adjust this depending on your actual HTML structure */
+body > div {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+
+
+/* Define CSS variables for consistency and maintainability */
+:root {
+    --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --color-primary: #102317; /* Dark greenish-black */
+    --color-secondary: #ffffff;
+    --color-accent: #4CAF50; /* Green for buttons */
+    --color-background: #f0f0f0;
+  }
+  
+ 
+  body {
+    font-family: var(--font-primary);
+    background-color: var(--color-background);
+    margin: 0;
+    padding: 0;
+    max-width: 2900vh;
+    width: 100%;
+  }
+  
+  .header {
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+    padding: 20px 0;
+    text-align: center;
+  }
+  
+  .main-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  .button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button-primary {
+    background-color: var(--color-accent);
+    color: var(--color-secondary);
+  }
+  
+  .button-primary:hover {
+    background-color: darken(var(--color-accent), 10%);
+  }
+  
+  .button-secondary {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+  }
+  
+  .button-secondary:hover {
+    background-color: lighten(var(--color-secondary), 5%);
+  }
+  
+  /* Responsive design adjustments */
+  @media (max-width: 768px) {
+    .main-container {
+      padding: 10px;
+    }
+  
+    .header h1 {
+      font-size: 2rem;
+    }
+  }
+  
+  /* Full-width image styling */
+.full-width-image {
+    width:100%;
+    height:20% ;
+    margin-left: 25%;
+    display: block; /* Removes any default margin or padding */
+  }
+  
+  /* Ensure the container does not have padding or margin that might affect the full width */
+  .main-container, .header {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  .app-container {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    min-height: 100vh;
+}
+
+.bg-body-tertiary-bg-primary{
+  background-color: #0762C8 /* Lighter shade of primary */
+  
+}
+
+
+.cards-row{
+  display: flex;
+  flex-wrap: wrap; /* Allows cards to wrap to the next line on smaller screens */
+  justify-content: space-around; /* Adjusts spacing around items */
+  gap: 20px;
+  flex-direction: row;
+}
+.custom-card{
+  width: 340px; /* Set your desired width */
+height: 270px; /* Set your desired height */
+margin: auto; /* Centers the card horizontally in its container */
+ /* or 'absolute', depending on how you want to position it */
+top: 50px;
+}
+
+/* Footer.css */
+.footer {
+position: fixed;
+bottom: 0;
+width: 100%;
+background-color: #f5f5f5;
+text-align: center;
+padding: 1rem 0;
+}
+
+@media (max-width: 768px) {
+.footer {
+  position: relative;
+}
+}
+
+.background-radial-gradient {
+background-color: hsl(218, 41%, 15%);
+background-image: radial-gradient(650px circle at 0% 0%,
+    hsl(218, 41%, 35%) 15%,
+    hsl(218, 41%, 30%) 35%,
+    hsl(218, 41%, 20%) 75%,
+    hsl(218, 41%, 19%) 80%,
+    transparent 100%),
+  radial-gradient(1250px circle at 100% 100%,
+    hsl(218, 41%, 45%) 15%,
+    hsl(218, 41%, 30%) 35%,
+    hsl(218, 41%, 20%) 75%,
+    hsl(218, 41%, 19%) 80%,
+    transparent 100%);
+}
+
+#radius-shape-1 {
+height: 220px;
+width: 220px;
+top: -60px;
+left: -130px;
+background: radial-gradient(#44006b, #ad1fff);
+overflow: hidden;
+}
+
+#radius-shape-2 {
+border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
+bottom: -60px;
+right: -110px;
+width: 300px;
+height: 300px;
+background: radial-gradient(#44006b, #ad1fff);
+overflow: hidden;
+}
+
+.bg-glass {
+background-color: hsla(0, 0%, 100%, 0.9) !important;
+backdrop-filter: saturate(200%) blur(25px);
+}
+
+.midBtnpadding {
+padding : '10px 20px';
+margin : '3px 2px';
+}
