@@ -5,7 +5,7 @@ function NotificationsPage() {
       <>
       
         <NavbarDash/>
-      <h1>Notifications</h1>
+        <h1>Notifications</h1>
 
       </>
 

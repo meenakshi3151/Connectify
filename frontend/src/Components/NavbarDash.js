@@ -129,7 +129,6 @@ function NavbarDash() {
                 setbtntext("Enable Dark Mode")
               }
          }
-  // console.log(searchResults[0].name);
  searchResults.map((result) => {
   console.log('hi'+result.name);
 });
@@ -150,6 +149,7 @@ function NavbarDash() {
             <Link to ="/notifications">
             <Nav.Link href="NotificationPage.js" style={myStyle}>Notifications</Nav.Link>
             </Link>
+            
             <Link to ="#about">
             <Nav.Link href="AboutUs.js" style={myStyle}>Add</Nav.Link>
             </Link>

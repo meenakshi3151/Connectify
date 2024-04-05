@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
+const {ObjectId} = mongoose.Schema.Types;
 const validate = require("mongoose-validator");
 
 const passwordValidator = [
@@ -45,10 +46,10 @@ const userSchema = mongoose.Schema(
             default: "user"
         },
         notifications:{
-          type:Array
+          type:mongoose.Schema.Types.ObjectId,ref:'Notification'
         },
         posts:{
-          type:Array
+          type:mongoose.Schema.Types.ObjectId,ref:'Post'
         },
         followers:{
           type:Number,
@@ -61,7 +62,24 @@ const userSchema = mongoose.Schema(
        postCount:{
         type:Number,
         default:0
-       }
+       },
+       followers:[
+          {
+            type:ObjectId,
+            ref:"User"
+          }
+        
+       ],
+        followingList:[
+          {
+            type:ObjectId,
+            ref:"User"
+          }
+        ],
+        requests:{
+          type:Array
+        },
+        
 
     }
 );

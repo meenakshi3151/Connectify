@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
+const {ObjectId} = mongoose.Schema.Types;
 const validate = require("mongoose-validator");
 
 
@@ -51,11 +52,11 @@ const adminSchema=mongoose.Schema(
             type:String,
             default: "admin"
          },
-         notifications:{
-          type:Array
+        notifications:{
+          type:mongoose.Schema.Types.ObjectId,ref:'Notification'
         },
         posts:{
-          type:Array
+          type:mongoose.Schema.Types.ObjectId,ref:'Post'
         },
         followerCount:{
           type:Number,
@@ -69,12 +70,23 @@ const adminSchema=mongoose.Schema(
         type:Number,
         default:0
        },
-       followers:{
+       followers:[
+        {
+          type:ObjectId,
+          ref:"User"
+        }
+      
+     ],
+      followingList:[
+        {
+          type:ObjectId,
+          ref:"User"
+        }
+      ],
+       requests:{
         type:Array
-       },
-       following:{
-        type:Array
-       }
+      },
+      
 
     }
 )
