@@ -14,6 +14,7 @@ import {
 	MDBIcon
   }
   from 'mdb-react-ui-kit';
+import NavbarDash from './NavbarDash'
   import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css";
 import FilePondPluginFileEncode from "filepond-plugin-file-encode";
@@ -99,7 +100,7 @@ console.log(error)
 
     return (
         <>
-		
+		<NavbarDash/>
  <MDBCard className='my-5'>
     <MDBCardBody className='p-5'>
    

@@ -5,6 +5,7 @@ import HomePage from './Pages/HomePage';
 import Dashboard from './Pages/Dashboard';
 import LoginPage from './Components/LoginPage';
 import CreatePost from './Components/CreatePost';
+import ShowPosts from './Components/ShowPosts';
 function App() {
   return (
   <Router>
@@ -13,7 +14,8 @@ function App() {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/" element={<HomePage/>}/>
       <Route path='/addPost' element={<CreatePost/>}/>
-      {/* Other routes */}
+      <Route path='/showAllPosts' element={<ShowPosts/>}/>
+     
     </Routes>
   </Router>
   );

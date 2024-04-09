@@ -6,7 +6,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import axios from 'axios';
 import SearchUserCard from './SearchUserCard';
-
+import ShowPosts from './ShowPosts';
 import { HashLink as Link} from 'react-router-hash-link';
 import {
   Box, 
@@ -144,8 +144,9 @@ function NavbarDash() {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Nav.Link href="#action1" style={myStyle}>Explore</Nav.Link>
-            
+            <Link to ="/showAllPosts">
+            <Nav.Link href="ShowPosts.js" style={myStyle}>Explore</Nav.Link>
+            </Link>
             <Link to ="/notifications">
             <Nav.Link href="NotificationPage.js" style={myStyle}>Notifications</Nav.Link>
             </Link>
