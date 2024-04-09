@@ -4,6 +4,7 @@ import './App.css';
 import HomePage from './Pages/HomePage';
 import Dashboard from './Pages/Dashboard';
 import LoginPage from './Components/LoginPage';
+import CreatePost from './Components/CreatePost';
 function App() {
   return (
   <Router>
@@ -11,6 +12,7 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/" element={<HomePage/>}/>
+      <Route path='/addPost' element={<CreatePost/>}/>
       {/* Other routes */}
     </Routes>
   </Router>

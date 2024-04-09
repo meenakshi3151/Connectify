@@ -150,15 +150,15 @@ function NavbarDash() {
             <Nav.Link href="NotificationPage.js" style={myStyle}>Notifications</Nav.Link>
             </Link>
             
-            <Link to ="#about">
-            <Nav.Link href="AboutUs.js" style={myStyle}>Add</Nav.Link>
+            <Link to ="/addPost">
+            <Nav.Link href="CreatePost.js" style={myStyle}>Add</Nav.Link>
             </Link>
             
             <Link to = "#">
             <Nav.Link href="Dashboard.js" style={myStyle}>Your Profile</Nav.Link>
             </Link>
           </Nav>
-          
+          may 
           <div>
           <Tooltip label="Search Users to chat" hasArrow placement="bottom-end">
           <Button variant="ghost" onClick={onOpen}>

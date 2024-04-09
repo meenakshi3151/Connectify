@@ -211,7 +211,7 @@ const toast=useToast();
               <br></br>
               <p style={{textAlign: "center"}}>Already have an account: </p>
               <div class="d-grid gap-2 col-6 mx-auto">
-     <button class="btn btn-primary" type="button" style={{background: "#222"}} onClick={() =>{props.setLoginForm(true)}}>Login</button>
+              <button class="btn btn-primary" type="button" style={{background: "#222"}} onClick={() =>{props.setLoginForm(true)}}>Login</button>
                </div>
              
             </MDBCardBody>

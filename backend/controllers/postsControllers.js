@@ -2,7 +2,7 @@ const asyncHandler = require("express-async-handler");
 const Post = require("../schemas/postsModel");
 
 const sendPosttoDB = asyncHandler(async (req, res) => {
-    console.log("hi")
+   // console.log("hi")
     const { title, body, photoEncode, phototype } = req.body;
     console.log(title)
     console.log(body)
