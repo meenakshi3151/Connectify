@@ -30,11 +30,6 @@ registerPlugin(
 	FilePondPluginFileValidateType
 );
 
-// import {
-//     // TextField,
-//     FilledTextField,
-//     OutlinedTextField,
-//   } from 'rn-material-ui-textfield';
   
 function CreatePost(){
     const [files,setFiles]=useState('')

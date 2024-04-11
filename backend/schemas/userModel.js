@@ -51,14 +51,7 @@ const userSchema = mongoose.Schema(
         posts:{
           type:mongoose.Schema.Types.ObjectId,ref:'Post'
         },
-        followers:{
-          type:Number,
-          default:0
-        },
-        following:{
-          type:Number,
-          default:0
-        },
+       
        postCount:{
         type:Number,
         default:0
