@@ -33,5 +33,13 @@ const user = await User.findOne({ email });
         }
     }
 })
-
-module.exports={authUserFunction}
+const logout = async (req, res) => {
+  try {
+    // Clear the token cookie
+    res.clearCookie("token", { sameSite: "none", secure: true }).status(200).send("User logged out successfully!");
+  } catch (err) {
+    // Handle errors
+    res.status(500).json(err);
+  }
+};
+module.exports={authUserFunction,logout}

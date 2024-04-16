@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-
+import { useNavigate } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import axios from 'axios';
@@ -21,6 +21,8 @@ import {
   Tooltip,
  
  } from "@chakra-ui/react";
+
+
 import { useDisclosure } from '@chakra-ui/react';
 import { useToast } from '@chakra-ui/react';
 
@@ -36,6 +38,7 @@ function NavbarDash() {
 
   const [searchValue, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   
   const handleSearch = async (e) => {
@@ -108,6 +111,20 @@ function NavbarDash() {
    const {isOpen, onOpen, onClose} = useDisclosure();
    const [btntext, setbtntext] = useState("Enable Dark mode");
 
+   const handleLogout=async()=>{
+    try{
+      const res=await axios.get("http://localhost:5000/logout")
+      // console.log(res)
+     
+      navigate("/")
+  
+    }
+    catch(err){
+      console.log(err)
+    }
+  }
+
+  
   const toggleStyle =  () =>{
          if(myStyle.color === '#222'){
               setmyStyle({
@@ -204,9 +221,9 @@ function NavbarDash() {
       </Drawer>
           
           <button onClick = {toggleStyle} type="button" style = {{backgroundColor:"blue"}}class="btn btn-primary mx-4">{btntext}</button>
-             <Link to = "#login">
-             <Button variant="outline-success" href = "Login.js">Logout</Button>
-             </Link>     
+           
+             <Button variant="outline-success" onClick={handleLogout}>Logout</Button>
+              
         </Navbar.Collapse>
       </Container>
     </Navbar>

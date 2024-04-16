@@ -99,7 +99,7 @@ const toast=useToast();
           isClosable: true,
           position: "bottom",
         });
-      navigate('/authUser')
+      navigate('/')
       } else {
         // Handle the case where the response does not contain 'data'
         toast({

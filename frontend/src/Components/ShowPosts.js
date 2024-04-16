@@ -41,8 +41,8 @@ function ShowPosts() {
 					<div>
 						<div class="p-3 px-6 min-h-48 flex justify-center items-center" >
 							<custom-card3>
-								<div>{item._id}</div>
-								<div>{item.PostedBy}</div>
+								{/* <div>{item._id}</div>
+								<div>{item.PostedBy}</div> */}
 								<div class="rounded-md shadow-md sm:w-96 bg-coolGray-900 text-coolGray-100">
 									<div class="flex items-center justify-between p-3" >
 										<div class="flex items-center space-x-2" >
@@ -60,14 +60,14 @@ function ShowPosts() {
 														{/* {item.PostedBy.name} */}
 													{/* </Link> */}
 												</h2>
-												{/* <span class="inline-block text-xs leading-none text-coolGray-400" >New York City</span> */}
+												<span class="inline-block text-xs leading-none text-coolGray-400" >New York City</span>
 											</div>
 										</div>
 										<button title="Open options" type="button">
 
 										</button>
 									</div>
-									<img src="https://stackdiary.com/140x100.png" alt="" class="object-cover object-center w-full h-72 bg-coolGray-500" />
+									
 									<div class="p-3" >
 										<img
 

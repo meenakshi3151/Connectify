@@ -1,15 +1,45 @@
-const express=require('express');
-const {registerUser}=require("../controllers/userControllers");
-const {registerAdmin}=require("../controllers/adminControllers");
+// const express=require('express');
+// const {registerUser}=require("../controllers/userControllers");
+// const {registerAdmin}=require("../controllers/adminControllers");
 
+// const {getAllUsers, getAllAdmins}=require("../controllers/getAllUsersControllers");
+// const router=express.Router();
+// const {authUserFunction}=require("../controllers/authUserControllers");
+// router.post("/authUser",authUserFunction);
+// router.post("/registerUser",registerUser);
+// router.post("/registerAdmin",registerAdmin);
+// router.get("/registerUser",getAllUsers);  
+// router.get("/registerAdmin",getAllAdmins);  
+                           
+// module.exports = router;
+
+const express=require('express');
+
+const jwt=require('jsonwebtoken')
+
+const {registerUser ,getUserProfile,uploadProfileImage,getProfileImage}=require("../controllers/userControllers");
+const {registerAdmin, getadminProfile}=require("../controllers/adminControllers");
 const {getAllUsers, getAllAdmins}=require("../controllers/getAllUsersControllers");
 const router=express.Router();
-const {authUserFunction}=require("../controllers/authUserControllers");
+const {authUserFunction,logout}=require("../controllers/authUserControllers");
 router.post("/authUser",authUserFunction);
+router.get("/logout",logout);
 router.post("/registerUser",registerUser);
 router.post("/registerAdmin",registerAdmin);
 router.get("/registerUser",getAllUsers);  
+router.post("/uploadimage",uploadProfileImage);
+router.get("/profileimage/:userId",getProfileImage);
 router.get("/registerAdmin",getAllAdmins);  
-                           
-module.exports = router;
+router.get("/profile/:id" ,getUserProfile);
+router.get("/adminprofile/:id",getadminProfile);
+router.get("/refetch", (req,res)=>{
+    const token=req.cookies.token
+    jwt.verify(token,process.env.SECRET,{},async (err,data)=>{
+        if(err){
+            return res.status(404).json(err)
+        }
+        res.status(200).json(data)
+    })
+})
 
+module.exports = router;

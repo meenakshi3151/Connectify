@@ -94,7 +94,7 @@ function SignUpUser(props) {
           isClosable: true,
           position: "bottom",
         });
-        navigate('/authUser')
+        navigate('/')
       } else {
         
         toast({

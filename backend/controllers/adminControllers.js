@@ -47,5 +47,21 @@ const registerAdmin = asyncHandler(async(req,res)=>{
         throw new Error("User not found");
     }
 });
+const getadminProfile = asyncHandler(async (req, res) => {
+    const adminId = req.params.id; // Assuming the ID is provided in the URL parameter
+    const admin = await Admin.findById(adminId);
+    if (!admin) {
+        res.status(404).json({ message: "User not found" });
+    } else {
+        res.json({
+            _id: admin._id,
+            name: admin.name,
+            email: admin.email,
+            phone: admin.phone,
+            // Add more details as needed
+        });
+    }
+  });
 
-module.exports={registerAdmin};
+module.exports={registerAdmin,getadminProfile};
+
