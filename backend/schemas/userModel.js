@@ -3,79 +3,72 @@ const bcrypt = require("bcryptjs");
 const {ObjectId} = mongoose.Schema.Types;
 const validate = require("mongoose-validator");
 
-const passwordValidator = [
-    validate({
-      validator: "isLength",
-      arguments: [8, 50], 
-      message: "Password should be between {ARGS[0]} and {ARGS[1]} characters",
-    }),
+// const passwordValidator = [
+//     validate({
+//       validator: "isLength",
+//       arguments: [8, 50], 
+//       message: "Password should be between {ARGS[0]} and {ARGS[1]} characters",
+//     }),
     
-    validate({
-      validator: "matches",
-      arguments: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/,
-      message:
-        "Password should contain at least one digit, one lowercase letter, one uppercase letter, one special character, and must be at least 8 characters long.",
-    }),
-  ];
+//     validate({
+//       validator: "matches",
+//       arguments: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/,
+//       message:
+//         "Password should contain at least one digit, one lowercase letter, one uppercase letter, one special character, and must be at least 8 characters long.",
+//     }),
+//   ];
   
-const userSchema = mongoose.Schema(
-    {
-        name: {
-            type: String,
-            required: true
-        },
-        email: {
-            type: String,
-            unique: true,
-            required: true
-        },
-        phone: {
-            type: String,
-            required: true
-        },
-        password: {
-            type: String,
-            required: true,
-            validate: passwordValidator
-        },
-        status: {
-            type: String,
-        },
-        role: {
-            type: String,
-            default: "user"
-        },
-        notifications:{
-          type:mongoose.Schema.Types.ObjectId,ref:'Notification'
-        },
-        posts:{
-          type:mongoose.Schema.Types.ObjectId,ref:'Post'
-        },
-       
-       postCount:{
-        type:Number,
-        default:0
-       },
-       followers:[
-          {
-            type:ObjectId,
-            ref:"User"
-          }
-        
-       ],
-        followingList:[
-          {
-            type:ObjectId,
-            ref:"User"
-          }
-        ],
-        requests:{
-          type:Array
-        },
-        
+  const userSchema = mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    phone: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true,
+        // validate: passwordValidator
+    },
+    status: {
+        type: String,
+    },
+    role: {
+        type: String,
+        default: "user"
+    },
+    notifications: [{
+        type: ObjectId,
+        ref: 'Notification'
+    }],
+    posts: [{
+        type: ObjectId,
+        ref: 'Post'
+    }],
+    postCount: {
+        type: Number,
+        default: 0
+    },
+    followers: [{
+        type: ObjectId,
+        ref: "User"
+    }],
+    followingList: [{
+        type: ObjectId,
+        ref: "User"
+    }],
+    requests: {
+        type: Array
+    },
+});
 
-    }
-);
 
 userSchema.methods.matchPassword = async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password);

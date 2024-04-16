@@ -22,7 +22,8 @@ function ShowPosts() {
 			// console.log("misho" + res.data.posts[1]._id);
 			setData(res.data.posts);
 			res.data.posts.forEach(post => {
-				console.log(post._id);
+				//console.log(post._id);
+				//console.log(post.PostedBy)
 			});
 			// console.log("hi");
 		});
@@ -41,24 +42,25 @@ function ShowPosts() {
 						<div class="p-3 px-6 min-h-48 flex justify-center items-center" >
 							<custom-card3>
 								<div>{item._id}</div>
+								<div>{item.PostedBy}</div>
 								<div class="rounded-md shadow-md sm:w-96 bg-coolGray-900 text-coolGray-100">
 									<div class="flex items-center justify-between p-3" >
 										<div class="flex items-center space-x-2" >
 											<img src="https://stackdiary.com/140x100.png" alt="" class="object-cover object-center w-8 h-8 rounded-full shadow-sm bg-coolGray-500 border-coolGray-700" />
 											<div class="-space-y-1" >
 												<h2 class="text-sm font-semibold leading-none" >
-													<Link
+													{/* <Link
 
 														to={
 															item._id !== state._id
 																? `/profile/${item._id}`
 																: "/profile"
 														}
-													>
-														{/* {item.PostedBy.Name} */}
-													</Link>
+													> */}
+														{/* {item.PostedBy.name} */}
+													{/* </Link> */}
 												</h2>
-												<span class="inline-block text-xs leading-none text-coolGray-400" >New York City</span>
+												{/* <span class="inline-block text-xs leading-none text-coolGray-400" >New York City</span> */}
 											</div>
 										</div>
 										<button title="Open options" type="button">
@@ -80,16 +82,9 @@ function ShowPosts() {
 									</div>
 									<div class="space-y-3" >
 										<p class="text-sm" >
-											{/* <span class="text-base font-semibold">	<Link
-
-												to={
-													item.PostedBy._id !== state._id
-														? `/profile/${item.PostedBy._id}`
-														: "/profile"
-												}
-											>
-												{item.PostedBy.Name}
-											</Link></span> {item.Body} */}
+											<span class="text-base font-semibold">	
+												{/* {item.PostedBy.name} */}
+											</span> {item.Body}
 										</p>
 										<input type="text" placeholder="Add a comment..." class="w-full py-0.5 bg-transparent border-none rounded text-sm pl-0 text-coolGray-100" />
 									</div>

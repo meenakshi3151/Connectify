@@ -37,7 +37,10 @@ function CreatePost(){
 	const toast=useToast()
 	const handlePostData =async (e) => {
 e.preventDefault();
-console.log("click")
+const userInfo = JSON.parse (localStorage.getItem("userInfo"));
+const userId=userInfo._id;
+console.log(userInfo)
+
 		
 		// the Index 0 means the first file , we will add in the future the support of multiple
 		// images upload , the max will be 10 images per post
@@ -70,6 +73,7 @@ console.log("click")
 				body: caption,
 				photoEncode,
 				photoType,
+				userId
 			},
 			config
 		).then((rep) => {

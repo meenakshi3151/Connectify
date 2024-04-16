@@ -22,8 +22,8 @@ const postsModel = new mongoose.Schema(
 		},
         //who posted the photo 
 		PostedBy: {
-			type: ObjectId,
-			ref: "User",
+			type: String,
+			// ref: "User",
 		},
 		Likes: [{ type: ObjectId, ref: "User" }],
 		Comments: [
@@ -40,3 +40,4 @@ const postsModel = new mongoose.Schema(
 );
 
 module.exports = mongoose.model("Post", postsModel);
+
