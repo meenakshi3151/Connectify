@@ -14,29 +14,39 @@ function ShowPosts() {
 		},
 	};
 	console.log("hi");
+	const [email, setEmail] = useState("");
+	const getName = (id) => {
+		console.log(id);
+		axios.get('http://localhost:5000/getName', {
+			params:{
+				id:id
+		   } ,
+		 config}).then((res) => {
+			console.log(res.data);
+			setEmail(res.data);
+		});
+	};
 	useEffect(() => {
-		axios.get('http://localhost:5000/showAllPosts', config).then((res) => {
-			// setData(res.data.posts);
-			// console.log("misho"+res.data.data);
-			// console.log("misho" + res);
-			// console.log("misho" + res.data.posts[1]._id);
+		axios.get('http://localhost:5000/showAllPosts',
+	config).then((res) => {
+		
 			setData(res.data.posts);
 			res.data.posts.forEach(post => {
-				//console.log(post._id);
-				//console.log(post.PostedBy)
+				
 			});
 			// console.log("hi");
 		});
 	}, []);
-	// console.log('data'+data);
-	// console.log(data[0]._id);
+	
 	return (
 
 		<>
 			
 			<NavbarDash />
 			{data.map((item) => (
-				
+				console.log(item.PostedBy),
+				getName(item.PostedBy),
+
 				<div class="container mx-auto px-20">
 					<div>
 						<div class="p-3 px-6 min-h-48 flex justify-center items-center" >
@@ -60,7 +70,7 @@ function ShowPosts() {
 														{/* {item.PostedBy.name} */}
 													{/* </Link> */}
 												</h2>
-												<span class="inline-block text-xs leading-none text-coolGray-400" >New York City</span>
+												<span class="inline-block text-xs leading-none text-coolGray-400" >{email}</span>
 											</div>
 										</div>
 										<button title="Open options" type="button">

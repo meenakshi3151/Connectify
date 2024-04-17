@@ -45,5 +45,31 @@ const getAllAdmins = asyncHandler(async (req, res) => {
         res.status(500).json({ message: "Internal Server Error" });
     }
 });
+const getName = asyncHandler(async (req, res) => {
+    const { id } = req.query; 
+    console.log(id); 
+    const query = { _id: id };
+    console.log(query);
 
-module.exports={getAllUsers,getAllAdmins };
+    try {
+        const   user = await User.findOne(query)
+        const admin=await Admin.findOne(query);
+        if (user) {
+            res.status(200).json(user.email  );
+            return user.email;
+            // console.log(user);
+        } else if (admin) {
+            res.status(200).json(admin.email);
+            return admin.email;
+        }
+        else{
+            res.status(404).json({ message: "No user found with the provided id" });
+            return "Anonymous";
+        }
+}
+catch (error) {
+    console.error(error); 
+    res.status(500).json({ message: "Internal Server Error" });
+}}
+);
+module.exports={getAllUsers,getAllAdmins ,getName};

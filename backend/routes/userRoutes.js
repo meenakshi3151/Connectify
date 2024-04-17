@@ -19,7 +19,7 @@ const jwt=require('jsonwebtoken')
 
 const {registerUser ,getUserProfile,uploadProfileImage,getProfileImage}=require("../controllers/userControllers");
 const {registerAdmin, getadminProfile}=require("../controllers/adminControllers");
-const {getAllUsers, getAllAdmins}=require("../controllers/getAllUsersControllers");
+const {getAllUsers, getAllAdmins,getName}=require("../controllers/getAllUsersControllers");
 const router=express.Router();
 const {authUserFunction,logout}=require("../controllers/authUserControllers");
 router.post("/authUser",authUserFunction);
@@ -32,6 +32,7 @@ router.get("/profileimage/:userId",getProfileImage);
 router.get("/registerAdmin",getAllAdmins);  
 router.get("/profile/:id" ,getUserProfile);
 router.get("/adminprofile/:id",getadminProfile);
+router.get("/getName",getName);
 router.get("/refetch", (req,res)=>{
     const token=req.cookies.token
     jwt.verify(token,process.env.SECRET,{},async (err,data)=>{
