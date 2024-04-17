@@ -1,13 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import AuthenticationContext from "../contexts/Authcontexts";
+
 import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import NavbarDash from './NavbarDash'
 function ShowPosts() {
 	const [data, setData] = useState([]);
-	const { state, dispatch } = useContext(AuthenticationContext);
-	console.log('state'+state);
+	
 	const config = {
 		headers: {
 			"Content-type": "application/json",
@@ -70,7 +69,7 @@ function ShowPosts() {
 														{/* {item.PostedBy.name} */}
 													{/* </Link> */}
 												</h2>
-												<span class="inline-block text-xs leading-none text-coolGray-400" >{email}</span>
+												<span class="text-base font-semibold" >{email}</span>
 											</div>
 										</div>
 										<button title="Open options" type="button">
@@ -93,7 +92,7 @@ function ShowPosts() {
 									<div class="space-y-3" >
 										<p class="text-sm" >
 											<span class="text-base font-semibold">	
-												{/* {item.PostedBy.name} */}
+												{email}
 											</span> {item.Body}
 										</p>
 										<input type="text" placeholder="Add a comment..." class="w-full py-0.5 bg-transparent border-none rounded text-sm pl-0 text-coolGray-100" />

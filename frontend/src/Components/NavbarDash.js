@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import { useNavigate } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { useAuthenticationContext } from '../contexts/Authcontexts';
 import axios from 'axios';
 import SearchUserCard from './SearchUserCard';
 import ShowPosts from './ShowPosts';
@@ -34,7 +35,7 @@ function NavbarDash() {
      transition: 'all 0.3s ease',
      
   })
-
+const { authed, setAuthed } = useAuthenticationContext();
 
   const [searchValue, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -117,7 +118,7 @@ function NavbarDash() {
       // console.log(res)
      
       navigate("/")
-  
+        setAuthed(false)
     }
     catch(err){
       console.log(err)
@@ -176,7 +177,7 @@ function NavbarDash() {
             <Nav.Link href="Dashboard.js" style={myStyle}>Your Profile</Nav.Link>
             </Link>
           </Nav>
-          may 
+         
           <div>
           <Tooltip label="Search Users to chat" hasArrow placement="bottom-end">
           <Button variant="ghost" onClick={onOpen}>

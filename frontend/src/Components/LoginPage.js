@@ -14,14 +14,16 @@ import {
   MDBIcon
 }
 from 'mdb-react-ui-kit';
-
+import { useAuthenticationContext } from '../contexts/Authcontexts';
 import { HashLink as Link} from 'react-router-hash-link';
+
 
 
 function LoginPage(props) {
 const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { authed, setAuthed } = useAuthenticationContext();
   const toast=useToast();
 const handleLoginClick = async (e) => {
   e.preventDefault();
@@ -59,6 +61,7 @@ const handleLoginClick = async (e) => {
         isClosable: true,
         position: "bottom",
       });
+      setAuthed(true);
     //  navigate('/authUser')
     localStorage.setItem("userInfo", JSON.stringify(response.data));
     navigate('/dashboard');
