@@ -1,7 +1,5 @@
-
-
 import React, { useContext, useState, useEffect } from "react";
-import { UserContext } from "../contexts/userContext";
+import { UserContext } from "../contexts/UserContext";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -33,6 +31,7 @@ function Profile() {
       // Perform follow action here, for example:
       // const response = await axios.post(${URL}/api/follow, { userIdToFollow: userData.id });
       // Handle the response accordingly
+      const response = await axios.post(`${URL}/follow`);
     } catch (error) {
       console.error('Error following user:', error);
     }
@@ -41,7 +40,7 @@ function Profile() {
   const updateUserProfile = async (userDataToUpdate) => {
     try {
       // Assuming you have an API endpoint to update user profile
-      const response = await axios.put(`http://localhost:5000/profile/${userId}`, userDataToUpdate);
+      const response = await axios.put(`http://localhost:5000/profile/${userId}, userDataToUpdate`);
       console.log('User profile updated successfully:', response.data);
     } catch (error) {
       console.error('Error updating user profile:', error);

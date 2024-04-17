@@ -23,7 +23,7 @@ function LoginPage(props) {
 const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { authed, setAuthed } = useAuthenticationContext();
+  const { authed, setAuth} = useAuthenticationContext();
   const toast=useToast();
 const handleLoginClick = async (e) => {
   e.preventDefault();
@@ -61,7 +61,7 @@ const handleLoginClick = async (e) => {
         isClosable: true,
         position: "bottom",
       });
-      setAuthed(true);
+      setAuth(true);
     //  navigate('/authUser')
     localStorage.setItem("userInfo", JSON.stringify(response.data));
     navigate('/dashboard');

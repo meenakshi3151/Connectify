@@ -35,7 +35,7 @@ function NavbarDash() {
      transition: 'all 0.3s ease',
      
   })
-const { authed, setAuthed } = useAuthenticationContext();
+const { authed, setAuth } = useAuthenticationContext();
 
   const [searchValue, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -118,7 +118,7 @@ const { authed, setAuthed } = useAuthenticationContext();
       // console.log(res)
      
       navigate("/")
-        setAuthed(false)
+        setAuth(false)
     }
     catch(err){
       console.log(err)

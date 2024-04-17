@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { useState, useContext, useEffect } from "react";
-import axios from "axios";
+import axios from "axios"	;
 import NavbarDash from './NavbarDash'
 function ShowPosts() {
 	const [data, setData] = useState([]);
