@@ -58,18 +58,8 @@ const adminSchema=mongoose.Schema(
         posts:{
           type:mongoose.Schema.Types.ObjectId,ref:'Post'
         },
-        followerCount:{
-          type:Number,
-          default:0
-        },
-        followingCount:{
-          type:Number,
-          default:0
-        },
-        postCount:{
-        type:Number,
-        default:0
-       },
+       
+
        followers:[
         {
           type:ObjectId,

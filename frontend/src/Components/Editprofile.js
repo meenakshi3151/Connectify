@@ -4,52 +4,52 @@ import axios from "axios";
 import { UserContext } from "../contexts/UserContext";
 import NavbarDash from './NavbarDash';
 import { useAsyncValue } from "react-router-dom";
-
+import { useToast } from "@chakra-ui/toast";
 const EditProfile = () => {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const[phone,setPhone] = useState("");
+   
+   
+    const toast=useToast();
+    
+ const userInfo = JSON.parse (localStorage.getItem("userInfo"));
+ const [name, setName] = useState(userInfo.name);
+    const [email, setEmail] = useState(userInfo.email);
+    const[phone,setPhone] = useState(userInfo.phone);
     const [status,setStatus] = useState("");
-    const[followers,setFollowers] = useState("");
-    const [updated,setUpdated]=useState(false);
-    const [password,setPassword]=useState("")
-    
-    const [userData, setUserData] = useState(null);
-    
-    const userId = '6617672152877ee8112000a3'; // Example user ID
+console.log(userInfo)
 
-    useEffect(() => {
-        fetchProfile(); // Fetch profile data when component mounts
-    }, []);
-
-    const fetchProfile = async () => {
-        try {
-            const res = await axios.get(`http://localhost:5000/profile/${userId}`);
-            setName(res.data.name);
-            setEmail(res.data.email);
-            setPassword(res.data.password)
-            setPhone(res.data.phone);
-            setStatus(res.data.status);
-            setFollowers(res.data.followers);
-        } catch (err) {
-            console.log(err);
-        }
+    
+const handleUserUpdate=async(e)=>{
+    e.preventDefault();
+    if(!email || !name || !phone ){
+        toast({
+        title: "Please Fill all the Fields",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+        })
     }
-       
-    const handleUserUpdate=async ()=>{
-        setUpdated(false)
-        try{
-          const res=await axios.put(URL+"/users/"+userId,{name,email,password,phone,status},{withCredentials:true})
-          // console.log(res.data)
-          setUpdated(true)
-      
-        }
-        catch(err){
-          console.log(err)
-          setUpdated(false)
-        }
-      
-      }
+    try{
+         const config={
+            headers:{
+                "Content-type":"application/json"
+            }
+         }
+         const response=axios.put("http://localhost:5000/editProfile",{
+         params:{
+            email:email,
+            name:name,
+            phone:phone,
+            status:status
+         },config
+         });
+
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+   
 
     const containerStyle = {
         background: '#BA68C8',
@@ -87,14 +87,12 @@ const EditProfile = () => {
                                 <input onChange={(e)=>setEmail(e.target.value)} value={email} className="outline-none px-4 py-2 text-gray-500" placeholder="Your email" type="email"/>
                                 <div className="col-md-6"><input onChange={(e)=>setPhone(e.target.value)} value={phone} className="outline-none px-4 py-2 text-gray-500" placeholder="Your phoneno" type="phone"/></div>
                             </div>
+                           { userInfo.role==="admin" && setStatus(userInfo.position) &&
                             <div className="row mt-3">
-                                <div className="col-md-6"><input onChange={(e)=>setFollowers(e.target.value)} value={followers}  className="outline-none px-4 py-2 text-gray-500" placeholder="Followers" type="number"/></div>
-                                <div className="col-md-6"><input type="text" className="form-control" placeholder="Country" value="USA" /></div>
-                            </div>
-                            <div className="row mt-3">
-                                <div className="col-md-6"><input type="text" className="form-control" placeholder="Bank Name" value="Bank of America" /></div>
+                                <div className="col-md-6"><input type="text" className="form-control" placeholder="Designation"  /></div>
                                 <div className="col-md-6"><input onChange={(e)=>setStatus(e.target.value)} value={status} className="outline-none px-4 py-2 text-gray-500" placeholder="Your status" type="text"/></div>
                             </div>
+                           }
                             <div className="mt-5 text-right"><button className="btn btn-primary profile-button" type="button">Save Profile</button></div>
                         </div>
                     </div>
@@ -107,7 +105,6 @@ const EditProfile = () => {
           <div>
           {updated && <h3 className="text-green-500 text-sm text-center mt-4">user updated successfully!</h3>}
         </div>
-    
         </>
     );
 }

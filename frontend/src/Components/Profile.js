@@ -1,37 +1,22 @@
 
 import React, { useContext, useState, useEffect } from "react";
-import { UserContext } from "../contexts/UserContext";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function Profile() {
   const navigate = useNavigate();
-  const [userData, setUserData] = useState(null);
+ 
   const [loading, setLoading] = useState(true);
-  const [profileImage, setProfileImage] = useState(null); // State to store the profile image
-  const { user } = useContext(UserContext); // Access user object from UserContext
-  const userId = '6617672152877ee8112000a3'; // Assuming user ID is stored in user object
+  const [profileImage, setProfileImage] = useState(null);
+  
+  const userInfo = JSON.parse (localStorage.getItem("userInfo"));
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await axios.get(`http://localhost:5000/profile/${userId}`);
-        setUserData(response.data);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-        setLoading(false);
-      }
-    };
+console.log(userInfo)
 
-    fetchUserData();
-  }, [userId]); // Include userId in the dependency array
-
+ 
   const handleFollow = async () => {
     try {
-      // Perform follow action here, for example:
-      // const response = await axios.post(`${URL}/api/follow`, { userIdToFollow: userData.id });
-      // Handle the response accordingly
+     
       const response = await axios.post(`${URL}/follow`);
     } catch (error) {
       console.error('Error following user:', error);
@@ -40,12 +25,11 @@ function Profile() {
 
   const updateUserProfile = async (userDataToUpdate) => {
     try {
-      // Assuming you have an API endpoint to update user profile
-      const response = await axios.put(`http://localhost:5000/profile/${userId}`, userDataToUpdate);
+      const response = await axios.put(`http://localhost:5000/profile/${userInfo._id}`, userDataToUpdate);
       console.log('User profile updated successfully:', response.data);
     } catch (error) {
       console.error('Error updating user profile:', error);
-      throw error; // Optionally, re-throw the error for error handling further up the call stack
+      throw error; 
     }
   };
   
@@ -55,21 +39,15 @@ function Profile() {
     formData.append('profileImage', selectedPhoto);
   
     try {
-      // Assuming you have an API endpoint to upload the profile image
+     
       const response = await axios.post('http://localhost:5000/upload-profile-image', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
-  
-      // Assuming the response contains the URL of the uploaded profile image
       const { imageUrl } = response.data;
-  
-      // Set the profile image URL in state or context to display it
       setProfileImage(imageUrl);
   
-      // Optionally, you can update the user's profile with the new profile image URL
-      // This step depends on your backend implementation
       await updateUserProfile({ profileImageUrl: imageUrl });
   
       // Optionally, show a success message to the user
@@ -98,38 +76,33 @@ function Profile() {
   };
 
   const renderPhotos = () => {
-    if (!userData.photos || userData.photos.length === 0) {
-      return (
-        <div className="alert alert-warning">No photos posted yet. <button className="btn btn-primary" onClick={() => navigate('/add-photo')}>Add Photo</button></div>
-      );
-    } else {
-      return (
-        <div className="row g-2">
-          {userData.photos.map(photo => (
+    return (
+      <div className="row g-2">
+        {userInfo.posts ? (
+          userInfo.posts.map(photo => (
             <div className="col mb-2" key={photo.id}>
               <img src={photo.url} alt={photo.description} className="w-100 rounded-3" />
             </div>
-          ))}
-        </div>
-      );
-    }
+          ))
+        ) : (
+          <p>No posts available</p>
+        )}
+      </div>
+    );
+    
+      
+
+    
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!userData) {
-    return <div>Error fetching user data</div>;
-  }
-
+ 
   return (
     <section className="h-100 gradient-custom-2">
       <div className="container py-5 h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col col-lg-9 col-xl-7">
             <div className="card">
-              {/* Profile card content */}
+         
               <div className="rounded-top text-white d-flex flex-row" style={{ backgroundColor: '#000', height: '200px' }}>
                 <div className="ms-4 mt-5 d-flex flex-column" style={{ width: '150px' }}>
                   {profileImage && <img src={profileImage} alt="Profile" className="img-fluid img-thumbnail mt-4 mb-2" style={{ width: '150px', zIndex: 1 }} />}
@@ -139,25 +112,22 @@ function Profile() {
                   </button>
                 </div>
                 <div className="ms-3" style={{ marginTop: '130px' }}>
-                  <h5>{userData.name}</h5>
-                  <p>{userData.location}</p>
+                  <h5>{userInfo.name}</h5>
                 </div>
               </div>
               <div className="p-4 text-black" style={{ backgroundColor: '#f8f9fa' }}>
                 <div className="d-flex justify-content-end text-center py-1">
-                  <div>
-                    <p className="small text-muted mb-0">@{userData.name}</p>
-                    </div>
+  
                     <div>
-                    <p className="ml-3 mb-1 h5">{userData.photos ? userData.photos.length : 0} Photos</p>
-                    
+                    <p className="ml-3 mb-1 h5">{userInfo.post ? userInfo.post.length:0}</p>
+                    <p className="small text-muted mb-0">Photos</p>
                   </div>
                   <div className="px-3">
-                    <p className="mb-1 h5">{userData.followers}</p>
+                    <p className="mb-1 h5">{userInfo.followers ? userInfo.followers.length : 0}</p>
                     <p className="small text-muted mb-0">Followers</p>
                   </div>
                   <div>
-                    <p className="mb-1 h5">{userData.following}</p>
+                    <p className="mb-1 h5">{userInfo.following ? userInfo.following.length : 0}</p>
                     <p className="small text-muted mb-0">Following</p>
                   </div>
                 </div>

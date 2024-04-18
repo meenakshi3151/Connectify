@@ -2,7 +2,7 @@ const express=require('express');
 
 const jwt=require('jsonwebtoken')
 
-const {registerUser ,getUserProfile,uploadProfileImage,getProfileImage ,followUser}=require("../controllers/userControllers");
+const {registerUser ,getUserProfile,uploadProfileImage,getProfileImage ,followUser,editProfile}=require("../controllers/userControllers");
 const {registerAdmin, getadminProfile}=require("../controllers/adminControllers");
 const {getAllUsers, getAllAdmins,getName}=require("../controllers/getAllUsersControllers");
 const router=express.Router();
@@ -18,6 +18,7 @@ router.get("/profileimage/:userId",getProfileImage);
 router.get("/registerAdmin",getAllAdmins);  
 router.get("/profile/:id" ,getUserProfile);
 router.get("/adminprofile/:id",getadminProfile);
+router.put("/editProfile",editProfile)
 router.get("/getName",getName);
 router.get("/refetch", (req,res)=>{
     const token=req.cookies.token

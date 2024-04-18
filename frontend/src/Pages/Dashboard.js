@@ -7,7 +7,7 @@ function Dashboard(){
         <>     
         <NavbarDash/>
         <Profile/>
-  <SearchUserCard/>     
+      
         
         </>
     )
