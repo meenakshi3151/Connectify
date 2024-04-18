@@ -50,6 +50,7 @@ const EditProfile = () => {
         },
         config
       );
+      console.log("Response:", response);
       if (response.status === 200) {
         toast({
           title: "Profile Updated Successfully",
