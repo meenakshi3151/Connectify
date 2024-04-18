@@ -42,7 +42,7 @@ const handleUserUpdate = async (e) => {
           email: email,
           name: name,
           phone: phone,
-          id:userInfo._id,
+          _id: userInfo._id,
         },
         config
       );

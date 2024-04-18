@@ -44,6 +44,7 @@ import LoginPage from './Components/LoginPage';
 import CreatePost from './Components/CreatePost';
 import EditProfile from "./Components/Editprofile"
 import ShowPosts from './Components/ShowPosts';
+import SignUp from './Components/Signup';
 import RequireAuth from './Components/RequireAuth';
 
 import Addphoto from './Components/AddPhoto';
@@ -72,6 +73,7 @@ function App() {
       <Route path='/showAllPosts' element={<ShowPosts/>}/>
      <Route path='/editprofile' element={<EditProfile/>}/>
      <Route path='add-photo' element={<Addphoto/>}/>
+     <Route path="/register" element={<SignUp/>}/>
     </Routes>
     </AuthProvider>
   </Router>

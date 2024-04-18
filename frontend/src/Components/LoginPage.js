@@ -18,7 +18,7 @@ import { useAuthenticationContext } from '../contexts/Authcontexts';
 import { HashLink as Link} from 'react-router-hash-link';
 
 
-function LoginPage(props) {
+function LoginPage() {
 const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -120,7 +120,7 @@ const handleLoginClick = async (e) => {
                    <Link to = "#signup">
               <div>
                 <p className="mb-0">Don't have an account? 
-                 <a href="Signup.js" class="text-white-50 fw-bold" onClick={() => {props.setLoginForm(false)}} >   Sign Up</a></p>
+                <Link to="/register" className="text-white-50 fw-bold">Sign Up</Link></p>
               </div>
                </Link>
             </MDBCardBody>
