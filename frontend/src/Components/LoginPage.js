@@ -18,7 +18,6 @@ import { useAuthenticationContext } from '../contexts/Authcontexts';
 import { HashLink as Link} from 'react-router-hash-link';
 
 
-
 function LoginPage(props) {
 const navigate = useNavigate();
   const [email, setEmail] = useState('');

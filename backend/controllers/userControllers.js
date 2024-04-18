@@ -138,24 +138,23 @@ const followUser = asyncHandler(async (req, res) => {
 });
 
 const editProfile = async (req, res) => {
-  const { email, name, phone, status, id } = req.query;
+  const { email, name, phone, id } = req.body; // Get parameters from request body
   try {
     let user;
     let admin;
-
     user = await User.findOne({ _id: id });
     if (user) {
       user.email = email;
-      user.phone = phone;
       user.name = name;
+      user.phone = phone;
       await user.save();
       return res.status(200).json({ message: "User profile updated successfully" });
     }
     admin = await Admin.findOne({ _id: id });
     if (admin) {
       admin.email = email;
-      admin.phone = phone;
       admin.name = name;
+      admin.phone = phone;
       await admin.save();
       return res.status(200).json({ message: "Admin profile updated successfully" });
     }
@@ -166,5 +165,6 @@ const editProfile = async (req, res) => {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
 
 module.exports = {registerUser ,getUserProfile, uploadProfileImage, getProfileImage,followUser,editProfile};
