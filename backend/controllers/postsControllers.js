@@ -69,4 +69,40 @@ const showAllPosts=asyncHandler(async(req,res)=>{
                 console.log(err)
              })
 })
-module.exports = { sendPosttoDB,showAllPosts };
+
+
+const getUserPosts = async (req, res) => {
+    const userId = req.params.id;
+    try {
+      const posts = await Post.find({ PostedBy: userId }).populate("PostedBy", "_id name");
+      const formattedPosts = posts.map((item) => ({
+        _id: item._id,
+        Title: item.Title,
+        Body: item.Body,
+        PostedBy: item.PostedBy,
+        Photo: item.Photo ? item.Photo.toString("base64") : null,
+        PhotoType: item.PhotoType,
+      }));
+      console.log(formattedPosts);
+      return res.json(formattedPosts);
+    } catch (error) {
+      console.error("Error fetching user posts:", error);
+      return res.status(500).json({ error: "Internal server error" });
+    }
+  };
+  
+
+module.exports = { sendPosttoDB,showAllPosts ,getUserPosts};
+
+// const getUserPosts=asyncHandler(async(req,res))=>{
+//     const { id } = req.body;
+
+//     try{
+//         let user;
+//         let admin;
+//         user = await User.findOne({ _id: id });
+//         if(user){
+            
+//         }
+//     }
+// }

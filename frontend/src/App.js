@@ -46,7 +46,7 @@ import EditProfile from "./Components/Editprofile"
 import ShowPosts from './Components/ShowPosts';
 import SignUp from './Components/Signup';
 import RequireAuth from './Components/RequireAuth';
-
+import UserPosts from './Components/Userposts';
 import Addphoto from './Components/AddPhoto';
 import { AuthProvider } from './contexts/Authcontexts';
 function App() {
@@ -71,8 +71,9 @@ function App() {
       }/>
       <Route path='/addPost' element={<CreatePost/>}/>
       <Route path='/showAllPosts' element={<ShowPosts/>}/>
+      <Route path='/getUserPosts' element={<UserPosts/>}></Route>
      <Route path='/editprofile' element={<EditProfile/>}/>
-     <Route path='add-photo' element={<Addphoto/>}/>
+     <Route path='/add-photo' element={<Addphoto/>}/>
      <Route path="/register" element={<SignUp/>}/>
     </Routes>
     </AuthProvider>

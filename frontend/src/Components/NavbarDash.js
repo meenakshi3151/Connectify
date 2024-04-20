@@ -119,7 +119,6 @@ function NavbarDash() {
     try{
       const res=await axios.get("http://localhost:5000/logout")
       // console.log(res)
-     
       navigate("/")
   
     }
@@ -168,6 +167,11 @@ function NavbarDash() {
             <Link to ="/showAllPosts">
             <Nav.Link href="ShowPosts.js" style={myStyle}>Explore</Nav.Link>
             </Link>
+
+            <Link to ="/getUserPosts">
+            <Nav.Link href="Userposts.js" style={myStyle}>Your posts</Nav.Link>
+            </Link>
+
             <Link to ="/notifications">
             <Nav.Link href="NotificationPage.js" style={myStyle}>Notifications</Nav.Link>
             </Link>
