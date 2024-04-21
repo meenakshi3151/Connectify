@@ -21,7 +21,7 @@ const registerUser = asyncHandler(async (req, res) => {
         throw new Error("User already exists ");
     }
     if (photoEncode !== null) {
-      user.profileimg = Buffer.from(photoEncode, "base64");
+      profileimg = Buffer.from(photoEncode, "base64");
     
   }
     const user = await User.create({
@@ -29,7 +29,7 @@ const registerUser = asyncHandler(async (req, res) => {
         phone,
         password,
         email,
-        profileimg:user.profileimg
+        profileimg
     });
     if (user) {
         res.status(201).json({
@@ -73,41 +73,40 @@ const getUserProfile = asyncHandler(async (req, res) => {
     }
 });
 
-
-
-const uploadProfileImage = async (req, res) => {
-    try {
-      const { userId } = req.body; // Assuming the user ID is sent from the frontend
-      const profileImage = req.file.path;
-      
-      // Update user's profile image
-      await User.findByIdAndUpdate(userId, { profileImage });
-      
-      res.json({ message: 'Profile image uploaded successfully' });
-    } catch (error) {
-      console.error('Error uploading profile image:', error);
-      res.status(500).json({ error: 'Internal server error' });
+const editProfile = async (req, res) => {
+  const { email, name, phone, id ,photoEncode} = req.body; // Get parameters from request body
+  try {
+    let user;
+    let admin;
+    user = await User.findOne({ _id: id });
+    if(photoEncode!=null){
+      user.profileimg = Buffer.from(photoEncode, "base64");
     }
-  };
-  
-  // Function to get profile image
-  const getProfileImage = async (req, res) => {
-    try {
-      const { userId } = req.params;
-      const user = await User.findById(userId);
+    if (user) {
+      user.email = email;
+      user.name = name;
+      user.phone = phone;
       
-      if (!user || !user.profileImage) {
-        return res.status(404).json({ error: 'Profile image not found' });
-      }
-      
-      res.sendFile(user.profileImage);
-    } catch (error) {
-      console.error('Error getting profile image:', error);
-      res.status(500).json({ error: 'Internal server error' });
+      await user.save();
+      return res.status(200).json({ message: "User profile updated successfully" });
     }
-  };
- 
+    admin = await Admin.findOne({ _id: id });
+    if (admin) {
+      admin.email = email;
+      admin.name = name;
+      admin.phone = phone;
+      await admin.save();
+      return res.status(200).json({ message: "Admin profile updated successfully" });
+    }
+
+    return res.status(404).json({ message: "User or Admin not found" });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
 
 
-module.exports = {registerUser ,getUserProfile, uploadProfileImage, getProfileImage};
+
+module.exports = {registerUser ,getUserProfile,editProfile};
 

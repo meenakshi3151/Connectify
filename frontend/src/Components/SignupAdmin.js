@@ -3,6 +3,8 @@ import { useState } from 'react';
 import axios from "axios";
 import { BrowserRouter} from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+
+import { FilePond,registerPlugin} from "react-filepond";
 import { FaFacebook,FaGithub,FaInstagram,FaGoogle,FaTwitter ,FaLinkedin} from "react-icons/fa";
 import {
   MDBBtn,
@@ -17,10 +19,23 @@ import {
 }
 
 from 'mdb-react-ui-kit';
-
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css";
+import FilePondPluginFileEncode from "filepond-plugin-file-encode";
+import FilePondPluginImageResize from "filepond-plugin-image-resize";
+import FilePondPluginImageTransform from "filepond-plugin-image-transform";
+import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 
 import '../App.css';
 import { useToast } from "@chakra-ui/react";
+
+registerPlugin(
+	FilePondPluginImagePreview,
+	FilePondPluginFileEncode,
+	FilePondPluginImageResize,
+	FilePondPluginImageTransform,
+	FilePondPluginFileValidateType
+);
 
 function SignUpAdmin(props) {
 const toast=useToast();
@@ -30,11 +45,14 @@ const toast=useToast();
   const [password,setPassword]=useState('');
   const [company,setCompany]=useState('');
   const [position,setPosition]=useState('');
+  const [files,setFiles]=useState('')
   const [confirmPassword,setConfirmPassword]=useState('');
  const navigate=useNavigate();
   const handleSignUpAdminClick=async (e)=>{
     e.preventDefault();
-    if(email==='' || name==='' || phone==='' || password==='' || company==='' || position==='' || confirmPassword===''){
+    const photoEncode = files[0].getFileEncodeBase64String();
+    if(email==='' || name==='' || phone==='' || password==='' || company==='' || position==='' || confirmPassword==='' || !photoEncode===''){
+
       toast({
         title: "Please Fill all the Fields",
         status: "warning",
@@ -84,7 +102,8 @@ const toast=useToast();
           password,
           phone,
           company,
-          position
+          position,
+          photoEncode
         },
         config
       );
@@ -156,6 +175,17 @@ const toast=useToast();
 
           <MDBCard className='my-5'>
             <MDBCardBody className='p-5'>
+            <FilePond
+        class="mb-4"
+        labelIdle="Drag & Drop your picture"
+        files={files}
+        allowMultiple={false}
+        onupdatefiles={setFiles}
+        imageResizeTargetWidth={50}
+        imageResizeTargetHeight={50}
+        acceptedFileTypes={["image/jpeg", "image/png", "images/gif"]}
+        required={true}
+    />
 
               <MDBRow>
                 <MDBCol col='6'>

@@ -1,5 +1,5 @@
-import React, { useContext, useState, useEffect } from "react";
-
+import React from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -23,41 +23,6 @@ console.log(userInfo)
     }
   };
 
-  const updateUserProfile = async (userDataToUpdate) => {
-    try {
-      const response = await axios.put(`http://localhost:5000/profile/${userInfo._id}, userDataToUpdate`);
-      console.log('User profile updated successfully:', response.data);
-    } catch (error) {
-      console.error('Error updating user profile:', error);
-      throw error; 
-    }
-  };
-  
-  const handleAddPhoto = async (event) => {
-    const selectedPhoto = event.target.files[0];
-    const formData = new FormData();
-    formData.append('profileImage', selectedPhoto);
-  
-    try {
-     
-      const response = await axios.post('http://localhost:5000/upload-profile-image', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      });
-      const { imageUrl } = response.data;
-      setProfileImage(imageUrl);
-  
-      await updateUserProfile({ profileImageUrl: imageUrl });
-  
-      // Optionally, show a success message to the user
-      alert('Profile image uploaded successfully!');
-    } catch (error) {
-      console.error('Error uploading profile image:', error);
-      // Optionally, show an error message to the user
-      alert('Error uploading profile image. Please try again later.');
-    }
-  };
 
   const renderFollowButton = () => {
     // Logic to determine whether to show the follow button
@@ -106,7 +71,7 @@ console.log(userInfo)
               <div className="rounded-top text-white d-flex flex-row" style={{ backgroundColor: '#000', height: '200px' }}>
                 <div className="ms-4 mt-5 d-flex flex-column" style={{ width: '150px' }}>
                   {profileImage && <img src={profileImage} alt="Profile" className="img-fluid img-thumbnail mt-4 mb-2" style={{ width: '150px', zIndex: 1 }} />}
-                  <input type="file" accept="image/*" onChange={handleAddPhoto} style={{ zIndex: 1 }} />
+                  {/* <input type="file" accept="image/*" onChange={handleAddPhoto} style={{ zIndex: 1 }} /> */}
                   <button type="button" className="btn btn-outline-dark" data-mdb-ripple-color="dark" style={{ zIndex: 1 }} onClick={() => navigate('/editprofile')}>
                     Edit profile
                   </button>

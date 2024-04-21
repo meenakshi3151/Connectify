@@ -62,6 +62,7 @@ const handleLoginClick = async (e) => {
         position: "bottom",
       });
       setAuth(true);
+      console.log(response.data)
     //  navigate('/authUser')
     localStorage.setItem("userInfo", JSON.stringify(response.data));
     navigate('/dashboard');

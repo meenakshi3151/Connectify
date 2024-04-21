@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../schemas/userModel");
 const Admin=require("../schemas/adminModel");
+const { default: Profile } = require("../../frontend/src/Components/Profile");
 const authUserFunction=asyncHandler(async(req,res)=>{
 const {email,password}=req.body;
 const user = await User.findOne({ email });
@@ -11,7 +12,7 @@ const user = await User.findOne({ email });
         name: user.name,
         email: user.email,
         phone:user.phone,
-        
+        profileimg:user.profileimg
       });
     } else { 
         const user = await Admin.findOne({ email });
@@ -24,7 +25,8 @@ const user = await User.findOne({ email });
             phone:user.phone,
             password:user.password,
             company:user.company,
-            position:user.position
+            position:user.position,
+            profileimg:user.profileimg
           });
         } 
         else {

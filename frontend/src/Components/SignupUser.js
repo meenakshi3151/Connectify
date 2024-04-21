@@ -2,6 +2,8 @@ import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 import { useToast } from '@chakra-ui/toast';
+
+import { FilePond,registerPlugin} from "react-filepond";
 import { FaFacebook,FaGithub,FaInstagram,FaGoogle,FaTwitter ,FaLinkedin} from "react-icons/fa";
 import {
   MDBBtn,
@@ -15,22 +17,36 @@ import {
   MDBIcon
 }
 from 'mdb-react-ui-kit';
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css";
+import FilePondPluginFileEncode from "filepond-plugin-file-encode";
+import FilePondPluginImageResize from "filepond-plugin-image-resize";
+import FilePondPluginImageTransform from "filepond-plugin-image-transform";
+import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import {BrowserRouter,useNavigate} from "react-router-dom";
 
 import '../App.css';
-
+registerPlugin(
+	FilePondPluginImagePreview,
+	FilePondPluginFileEncode,
+	FilePondPluginImageResize,
+	FilePondPluginImageTransform,
+	FilePondPluginFileValidateType
+);
 function SignUpUser(props) {
   const [email, setEmail] = useState('');
   const [name,setName]=useState('');
   const [phone,setPhone]=useState('');
   const [password,setPassword]=useState('');
+  const [files,setFiles]=useState('')
 
   const [confirmPassword,setConfirmPassword]=useState('');
   const navigate=useNavigate();
   const toast=useToast();
   const handleSignUpUserClick=async (e)=>{
     e.preventDefault();
-    if(email==='' || name==='' || phone==='' || password==='' || confirmPassword===''){
+    const photoEncode = files[0].getFileEncodeBase64String();
+    if(email==='' || name==='' || phone==='' || password==='' || confirmPassword==='' || !photoEncode===''){
       toast({
         title: "Please Fill all the Fields",
         status: "warning",
@@ -41,6 +57,7 @@ function SignUpUser(props) {
    
       return;
     }
+   
     if(password!==confirmPassword){
      toast({
         title: "Passwords do not match",
@@ -79,7 +96,7 @@ function SignUpUser(props) {
           email,
           password,
           phone,
-          
+          photoEncode
         },
         config
       );
@@ -119,10 +136,7 @@ function SignUpUser(props) {
     }
   }
 
-    const backgroundStyle = {
-        background:'linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))',
-    }
-
+    
     return (
    
     <MDBContainer fluid  className='p-4 background-radial-gradient overflow-hidden' id = "signup">
@@ -145,9 +159,22 @@ function SignUpUser(props) {
 </MDBCol>
 
 <MDBCol md='6'>
-
+<FilePond
+        class="mb-4"
+        labelIdle="Drag & Drop your picture"
+        files={files}
+        allowMultiple={false}
+        onupdatefiles={setFiles}
+        imageResizeTargetWidth={50}
+        imageResizeTargetHeight={50}
+        acceptedFileTypes={["image/jpeg", "image/png", "images/gif"]}
+        required={true}
+    />
+    <br></br>
+    <br></br>
   <MDBCard className='my-5'>
     <MDBCardBody className='p-5'>
+    
     <MDBRow>
                 <MDBCol col='6'>
                   <MDBInput wrapperClass='mb-4' label='Name' id='form1' type='text' onChange={(e) => setName(e.target.value)}/>
