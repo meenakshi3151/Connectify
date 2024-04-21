@@ -32,6 +32,10 @@ const validate = require("mongoose-validator");
         type: String,
         required: true
     },
+    profileimg:{
+        type:Buffer,
+        default:"no photo"
+    },
     password: {
         type: String,
         required: true,

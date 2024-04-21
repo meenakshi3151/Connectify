@@ -57,7 +57,6 @@ const getName = asyncHandler(async (req, res) => {
         if (user) {
             res.status(200).json(user.email  );
             return user.email;
-            // console.log(user);
         } else if (admin) {
             res.status(200).json(admin.email);
             return admin.email;

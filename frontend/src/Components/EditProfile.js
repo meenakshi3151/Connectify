@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { UserContext } from "../contexts/UserContext";
+import { UserContext } from "../contexts/userContext";
 import NavbarDash from './NavbarDash';
 import { useAsyncValue } from "react-router-dom";
 

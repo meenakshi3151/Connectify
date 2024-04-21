@@ -173,7 +173,7 @@ const { authed, setAuth } = useAuthenticationContext();
             <Nav.Link href="CreatePost.js" style={myStyle}>Add</Nav.Link>
             </Link>
             
-            <Link to = "#">
+            <Link to = "/dashboard">
             <Nav.Link href="Dashboard.js" style={myStyle}>Your Profile</Nav.Link>
             </Link>
           </Nav>

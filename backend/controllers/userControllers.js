@@ -4,8 +4,8 @@ const Admin = require("../schemas/adminModel")
 
 //register the user(role)
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, phone, password } = req.body;
-    if (!name || !email || !password || !phone) {
+    const { name, email, phone, password,photoEncode } = req.body;
+    if (!name || !email || !password || !phone || !photoEncode) {
         res.status(400)
         throw new Error("Please enter all the fields")
     }
@@ -20,11 +20,16 @@ const registerUser = asyncHandler(async (req, res) => {
         res.status(400);
         throw new Error("User already exists ");
     }
+    if (photoEncode !== null) {
+      user.profileimg = Buffer.from(photoEncode, "base64");
+    
+  }
     const user = await User.create({
         name,
         phone,
         password,
-        email
+        email,
+        profileimg:user.profileimg
     });
     if (user) {
         res.status(201).json({
@@ -32,6 +37,7 @@ const registerUser = asyncHandler(async (req, res) => {
             name: user.name,
             email: user.email,
             phone: user.phone,
+            profileimg:user.profileimg
 
         });
     }
