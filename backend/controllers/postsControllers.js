@@ -91,18 +91,29 @@ const getUserPosts = async (req, res) => {
     }
   };
   
+  const deletePost = asyncHandler(async (req, res) => {
+    const postId = req.params.id;
 
-module.exports = { sendPosttoDB,showAllPosts ,getUserPosts};
 
-// const getUserPosts=asyncHandler(async(req,res))=>{
-//     const { id } = req.body;
+    const post = await Post.findById(postId);
 
-//     try{
-//         let user;
-//         let admin;
-//         user = await User.findOne({ _id: id });
-//         if(user){
-            
-//         }
-//     }
-// }
+    if (!post) {
+        res.status(404); // Post not found
+        throw new Error("Post not found");
+    }
+
+    const user = await User.findById(post.PostedBy);
+
+    if (user) {
+        user.posts = user.posts.filter((id) => id.toString() !== postId.toString());
+        await user.save(); 
+    }
+
+    await post.deleteOne();
+
+    res.json({ message: "Post deleted successfully" });
+});
+
+module.exports = { sendPosttoDB,showAllPosts ,getUserPosts,deletePost};
+
+

@@ -12,7 +12,7 @@ router.get("/logout",logout);
 router.post("/registerUser",registerUser);
 router.post("/registerAdmin",registerAdmin);
 router.get("/registerUser",getAllUsers);  
-router.post("/uploadimage",uploadProfileImage);
+router.post("/uploadphoto",uploadProfileImage);
 router.post("/follow", followUser);
 router.get("/profileimage/:userId",getProfileImage);
 router.get("/registerAdmin",getAllAdmins);  

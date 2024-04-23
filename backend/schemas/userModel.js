@@ -28,6 +28,13 @@ const validate = require("mongoose-validator");
         unique: true,
         required: true
     },
+    Photo: {
+        type: Buffer,
+        default: "no photo",
+    },
+    PhotoType: {
+        type: String,
+    },
     phone: {
         type: String,
         required: true

@@ -1,14 +1,12 @@
 
-
-
 const asyncHandler = require("express-async-handler");
 const User = require("../schemas/userModel");
 const Admin = require("../schemas/adminModel")
 
 //register the user(role)
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, phone, password } = req.body;
-    if (!name || !email || !password || !phone) {
+    const { name, email, phone, password,photoEncode } = req.body;
+    if (!name || !email || !password || !phone || !photoEncode) {
         res.status(400)
         throw new Error("Please enter all the fields")
     }
@@ -27,7 +25,8 @@ const registerUser = asyncHandler(async (req, res) => {
         name,
         phone,
         password,
-        email
+        email,
+        profileImage:photoEncode
     });
     if (user) {
         res.status(201).json({
@@ -35,7 +34,7 @@ const registerUser = asyncHandler(async (req, res) => {
             name: user.name,
             email: user.email,
             phone: user.phone,
-            
+            profileImage:user.profileImage,
         });
     }
     else {
@@ -138,7 +137,8 @@ const followUser = asyncHandler(async (req, res) => {
 });
 
 const editProfile = async (req, res) => {
-  const { email, name, phone, id } = req.body; // Get parameters from request body
+  const { email, name, phone, id } = req.body;
+  console.log("hiiii") // Get parameters from request body
   try {
     let user;
     let admin;
