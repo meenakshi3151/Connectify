@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Spinner } from "react-bootstrap"; // For loading spinner
 import "bootstrap/dist/css/bootstrap.min.css"; // Ensure Bootstrap is imported for Bootstrap classes
+import { useToast } from "@chakra-ui/react";
 
 function Profile() {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ function Profile() {
   const [error, setError] = useState(null);
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   const [postEmails, setPostEmails] = useState({});
+  const toast = useToast();
   // Fetch the user posts upon component mount
   useEffect(() => {
     const fetchUserPosts = async () => {
@@ -67,6 +69,29 @@ function Profile() {
     }
   };
 
+  const handleDeletePost = async (postId) => {
+    try {
+      await axios.delete(`http://localhost:5000/deleteUserPost/${postId}`); // DELETE request to the backend
+      setUserPosts(userPosts.filter((post) => post._id !== postId)); // Update state to remove the deleted post
+
+      toast({
+        title: "Post deleted successfully",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+    } catch (error) {
+      console.error("Error deleting post:", error);
+      toast({
+        title: "Error deleting post",
+        description: error.response?.data?.message || "An error occurred while deleting the post",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
+
   // const renderFollowButton = () => {
   //   const isFollowing = false; // Placeholder for logic, replace with actual logic
 
@@ -104,9 +129,9 @@ function Profile() {
                     <div class="-space-y-5">
                         <h2 class="text-sm font-semibold leading-none">{userInfo.email}</h2>
                       </div>
-                    <button
+                      <button
                       className="bg-red-600 text-white px-2 py-1 rounded"
-                      onClick={() => navigate('/getUserPosts')  } // Delete post by its ID
+                      onClick={() => handleDeletePost(post._id)} // Delete post by its ID
                     >
                       Delete
                     </button>
