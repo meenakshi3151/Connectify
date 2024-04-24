@@ -67,19 +67,19 @@ function Profile() {
     }
   };
 
-  const renderFollowButton = () => {
-    const isFollowing = false; // Placeholder for logic, replace with actual logic
+  // const renderFollowButton = () => {
+  //   const isFollowing = false; // Placeholder for logic, replace with actual logic
 
-    return (
-      <button
-        className={`btn ${isFollowing ? "btn-secondary" : "btn-primary"}`}
-        onClick={isFollowing ? null : handleFollow}
-        disabled={isFollowing}
-      >
-        {isFollowing ? "Following" : "Follow"}
-      </button>
-    );
-  };
+  //   return (
+  //     <button
+  //       className={`btn ${isFollowing ? "btn-secondary" : "btn-primary"}`}
+  //       onClick={isFollowing ? null : handleFollow}
+  //       disabled={isFollowing}
+  //     >
+  //       {isFollowing ? "Following" : "Follow"}
+  //     </button>
+  //   );
+  // };
 
   const renderPhotos = () => (
     <div className="row g-2">
@@ -101,6 +101,9 @@ function Profile() {
                         </h2>
                       </div>
                     </div>
+                    <div class="-space-y-5">
+                        <h2 class="text-sm font-semibold leading-none">{userInfo.email}</h2>
+                      </div>
                     <button
                       className="bg-red-600 text-white px-2 py-1 rounded"
                       onClick={() => navigate('/getUserPosts')  } // Delete post by its ID
@@ -143,10 +146,11 @@ function Profile() {
             <div className="d-flex flex-row align-items-center">
               {userInfo.Photo ? (
                 <img alt="" src={`data:${userInfo.PhotoType};base64,${userInfo.Photo}`}  
-                  
+                
                   className="img-fluid rounded-circle"
                   style={{ width: "100px", height: "100px", objectFit: "cover", border: "2px solid #fff" }}
                 />
+               
               ) : (
                 <div
                   style={{
@@ -161,7 +165,9 @@ function Profile() {
                 >
                   No Image
                 </div>
+
               )}
+             
               <div className="ms-4">
                 <h4>{userInfo.name}</h4>
                 <button
@@ -172,7 +178,7 @@ function Profile() {
                 </button>
               </div>
             </div>
-            <div className="ms-auto">{renderFollowButton()}</div>
+            {/* <div className="ms-auto">{renderFollowButton()}</div> */}
           </div>
           <div className="card-body" style={{ backgroundColor: "#f8f9fa" }}>
             <div className="d-flex justify-content-around text-center py-1">
