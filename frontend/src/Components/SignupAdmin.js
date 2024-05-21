@@ -186,7 +186,7 @@ const toast=useToast();
         acceptedFileTypes={["image/jpeg", "image/png", "images/gif"]}
         required={true}
     />
-
+<br></br>
               <MDBRow>
                 <MDBCol col='6'>
                   <MDBInput wrapperClass='mb-4' label='Name' id='form1' type='text' onChange={(e) => setName(e.target.value)}/>
@@ -196,7 +196,15 @@ const toast=useToast();
                   <MDBInput wrapperClass='mb-4' label='Phone' id='form1' type='number' onChange={(e) => setPhone(e.target.value)}/>
                 </MDBCol>
               </MDBRow>
+<br>
+</br>
+<br></br>
+<br>
+</br>
+<br></br>
 
+<br></br>
+<br></br>
               <MDBInput wrapperClass='mb-4' label='Email' id='form1' type='email' onChange={(e) => setEmail(e.target.value)}/>
               <MDBInput wrapperClass='mb-4' label='Company' id='form1' type='text' onChange={(e) => setCompany(e.target.value)}/>
               <MDBInput wrapperClass='mb-4' label='Position' id='form1' type='text' onChange={(e) => setPosition(e.target.value)}/>

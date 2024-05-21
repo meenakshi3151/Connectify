@@ -34,7 +34,7 @@ const validate = require("mongoose-validator");
     },
     profileimg:{
         type:Buffer,
-        default:"no photo"
+       
     },
     password: {
         type: String,

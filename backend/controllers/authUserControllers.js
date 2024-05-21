@@ -1,7 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../schemas/userModel");
 const Admin=require("../schemas/adminModel");
-const { default: Profile } = require("../../frontend/src/Components/Profile");
 const authUserFunction=asyncHandler(async(req,res)=>{
 const {email,password}=req.body;
 const user = await User.findOne({ email });

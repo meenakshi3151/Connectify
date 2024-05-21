@@ -5,7 +5,7 @@ const Admin=require("../schemas/adminModel")
 //register the admin(role)
 const registerAdmin = asyncHandler(async(req,res)=>{
     const {name,email,phone,password,
-    company,position}=req.body;
+    company,position,photoEncode}=req.body;
     if(!name || !email || !password || !phone || !company || !position || !photoEncode){
         res.status(400)
         throw new Error("Please enter all the fields")
@@ -23,7 +23,7 @@ const registerAdmin = asyncHandler(async(req,res)=>{
         throw new Error("User already exists ");
     }
     if (photoEncode !== null) {
-        admin.profileimg = Buffer.from(photoEncode, "base64");
+    Admin.profileimg = Buffer.from(photoEncode, "base64");
     }
     const admin=await Admin.create({
         name,
@@ -32,7 +32,7 @@ const registerAdmin = asyncHandler(async(req,res)=>{
         email,
         company,
         position,
-        profileimg:admin.profileimg
+        profileimg:Admin.profileimg
     });
 
     if(admin){
@@ -43,7 +43,7 @@ const registerAdmin = asyncHandler(async(req,res)=>{
             phone: admin.phone,
             company: admin.company,
             position: admin.position,
-            profileimg:admin.profileimg
+            profileimg: admin.profileimg.toString("base64"),
             
           });
     }

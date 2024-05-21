@@ -1,8 +1,6 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
 function Profile() {
   const navigate = useNavigate();
  
@@ -70,7 +68,7 @@ console.log(userInfo)
          
               <div className="rounded-top text-white d-flex flex-row" style={{ backgroundColor: '#000', height: '200px' }}>
                 <div className="ms-4 mt-5 d-flex flex-column" style={{ width: '150px' }}>
-                  {profileImage && <img src={profileImage} alt="Profile" className="img-fluid img-thumbnail mt-4 mb-2" style={{ width: '150px', zIndex: 1 }} />}
+                  {profileImage && <img src={userInfo.profileimg} alt="Profile" className="img-fluid img-thumbnail mt-4 mb-2" style={{ width: '150px', zIndex: 1 }} />}
                   {/* <input type="file" accept="image/*" onChange={handleAddPhoto} style={{ zIndex: 1 }} /> */}
                   <button type="button" className="btn btn-outline-dark" data-mdb-ripple-color="dark" style={{ zIndex: 1 }} onClick={() => navigate('/editprofile')}>
                     Edit profile
