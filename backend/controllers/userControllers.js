@@ -73,14 +73,11 @@ const getUserProfile = asyncHandler(async (req, res) => {
 });
 
 // server.js
-
-// Function to upload profile image
 const uploadProfileImage = async (req, res) => {
     try {
-      const { userId } = req.body; // Assuming the user ID is sent from the frontend
+      const { userId } = req.body; 
       const profileImage = req.file.path;
       
-      // Update user's profile image
       await User.findByIdAndUpdate(userId, { profileImage });
       
       res.json({ message: 'Profile image uploaded successfully' });
@@ -110,31 +107,41 @@ const uploadProfileImage = async (req, res) => {
 
   // Follow a user
 const followUser = asyncHandler(async (req, res) => {
-  const { userIdToFollow } = req.params.id;
-  const currentUser = req.user;
+  
+  // const currentUser = req.user;
 
   try {
-      // Check if the user exists
-      const userToFollow = await User.findById(userIdToFollow);
-      if (!userToFollow) {
-          res.status(404).json({ message: 'User not found' });
-          return;
+    const { userIdToFollow , userwhowantsttofollow} = req.body;
+      console.log("hi")
+      const userToFollow = await User.findOne({ _id: userIdToFollow});
+      const currentUser = await User.findOne({ _id: userwhowantsttofollow});
+      console.log(currentUser)
+            if (!currentUser) {
+        res.status(404).json({ message: 'Userwhowants not found' });
+      //  return;
+    }
+      if (!userToFollow ) {
+          res.status(404).json({ message: `User not foundhyuyfueu ${currentUser._id}` });
+          // return;
       }
-
-      // Add the user to the follower list of the current user
-      currentUser.following.push(userIdToFollow);
+     
+      
+      userToFollow.requests.push(userwhowantsttofollow);
+      currentUser.pendings.push(userIdToFollow)
       await currentUser.save();
-
-      // Optionally, you can update the followers list of the user being followed
-      userToFollow.followers.push(currentUser._id);
       await userToFollow.save();
 
-      res.json({ msg: 'User followed successfully' });
+  
+      // userToFollow.followers.push(currentUser._id);
+      // await userToFollow.save();
+
+      res.json({ msg: 'User requested successfully' });
   } catch (error) {
       console.error('Error following user:', error);
       res.status(500).send('Server Error');
   }
 });
+
 
 const editProfile = async (req, res) => {
   const { email, name, phone, id } = req.body;

@@ -13,13 +13,14 @@ router.post("/registerUser",registerUser);
 router.post("/registerAdmin",registerAdmin);
 router.get("/registerUser",getAllUsers);  
 router.post("/uploadphoto",uploadProfileImage);
-router.post("/follow", followUser);
+
 router.get("/profileimage/:userId",getProfileImage);
 router.get("/registerAdmin",getAllAdmins);  
 router.get("/profile/:id" ,getUserProfile);
 router.get("/adminprofile/:id",getadminProfile);
 router.put("/editProfile",editProfile)
 router.get("/getName",getName);
+router.post("/follow",followUser)
 router.get("/refetch", (req,res)=>{
     const token=req.cookies.token
     jwt.verify(token,process.env.SECRET,{},async (err,data)=>{

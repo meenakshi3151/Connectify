@@ -7,4 +7,5 @@ function RequireAuth({ children }) {
     const { auth } = useAuthenticationContext();
     return auth === true ? children : <LoginPage/> 
 }
+
 export default RequireAuth;

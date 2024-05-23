@@ -77,8 +77,8 @@ const adminSchema=mongoose.Schema(
         type:Array
       },
       
-      profileImage: {
-        type: String,
+      profileimg: {
+        type: Buffer,
       },
       
     }

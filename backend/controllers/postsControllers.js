@@ -42,33 +42,47 @@ const sendPosttoDB = asyncHandler(async (req, res) => {
 });
 
 
-const showAllPosts=asyncHandler(async(req,res)=>{
-    Post.find()
-             .populate("PostedBy","_id name")
-            //   console.log(PostedBy)
-             .sort("-createdAt")
-             .then((data)=>{
-               // console.log(data) 
-            //   console.log(data[0].PostedBy)  
-                let posts=[];
-                data.map((item)=>{
-                    console.log(data)
-                    posts.push({
-                        _id: item._id,
-                        Title: item.Title,
-                        Body: item.Body,
-                        PostedBy: item.PostedBy,
-                        Photo: item.Photo.toString("base64"),
-                        PhotoType: item.PhotoType,
+// const showAllPosts=asyncHandler(async(req,res)=>{
+//     Post.find()
+//              .populate("PostedBy","_id name")
+//             //   console.log(PostedBy)
+//              .sort("-createdAt")
+//              .then((data)=>{
+//                // console.log(data) 
+//             //   console.log(data[0].PostedBy)  
+//                 let posts=[];
+//                 data.map((item)=>{
+//                     console.log(data)
+//                     posts.push({
+//                         _id: item._id,
+//                         Title: item.Title,
+//                         Body: item.Body,
+//                         PostedBy: item.PostedBy,
+//                         Photo: item.Photo.toString("base64"),
+//                         PhotoType: item.PhotoType,
                         
-                    });
-                })
-                res.json({ posts });
-             })
-             .catch((err)=>{
-                console.log(err)
-             })
-})
+//                     });
+//                 })
+//                 res.json({ posts });
+//              })
+//              .catch((err)=>{
+//                 console.log(err)
+//              })
+// })
+const showAllPosts = async (req, res) => {
+  try {
+    const posts = await Post.find()
+      .populate('Comments') // Just specify the field name to populate
+      .exec();
+
+    res.status(200).json({ posts });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to fetch posts" });
+  }
+};
+
+module.exports = { showAllPosts };
 
 
 const getUserPosts = async (req, res) => {
@@ -114,6 +128,34 @@ const getUserPosts = async (req, res) => {
     res.json({ message: "Post deleted successfully" });
 });
 
-module.exports = { sendPosttoDB,showAllPosts ,getUserPosts,deletePost};
+
+const getPostDetails = async (req, res) => {
+  const postId = req.params.id; // Use the post ID from the request parameter
+  try {
+    const post = await Post.findById(postId).populate("PostedBy", "_id name");
+
+    if (!post) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+    
+    const formattedPost = {
+      _id: post._id,
+      Title: post.Title,
+      Body: post.Body,
+      PostedBy: post.PostedBy,
+      Photo: post.Photo ? post.Photo.toString("base64") : null,
+      PhotoType: post.PhotoType,
+    };
+
+    return res.json(formattedPost); // Return the formatted post details
+  } catch (error) {
+    console.error("Error fetching post details:", error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+
+
+module.exports = { sendPosttoDB,showAllPosts ,getUserPosts,deletePost ,getPostDetails};
 
 

@@ -28,13 +28,7 @@ const validate = require("mongoose-validator");
         unique: true,
         required: true
     },
-    Photo: {
-        type: Buffer,
-        default: "no photo",
-    },
-    PhotoType: {
-        type: String,
-    },
+
     phone: {
         type: String,
         required: true
@@ -59,21 +53,24 @@ const validate = require("mongoose-validator");
         type: ObjectId,
         ref: 'Post'
     }],
-    postCount: {
-        type: Number,
-        default: 0
-    },
+
     followers: [{
         type: ObjectId,
         ref: "User"
     }],
-    followingList: [{
+    followings: [{
         type: ObjectId,
         ref: "User"
     }],
     requests: {
         type: Array
     },
+  
+    profileimg: {
+        type: Buffer,
+      }
+      
+
 });
 
 

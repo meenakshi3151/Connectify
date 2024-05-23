@@ -57,13 +57,14 @@ const EditProfile = () => {
       if (response.status === 200) {
         // Update localStorage with new information
         const updatedUserInfo = {
-         
+          ...userInfo,
           email,
           name,
           phone,
         };
-       console.log(updatedUserInfo)
+        console.log(updatedUserInfo);
         localStorage.setItem("userInfo", JSON.stringify(updatedUserInfo));
+
 
         toast({
           title: "Profile updated successfully",

@@ -48,6 +48,7 @@ import SignUp from './Components/Signup';
 import RequireAuth from './Components/RequireAuth';
 import UserPosts from './Components/Userposts';
 import Addphoto from './Components/AddPhoto';
+import PostDetails from './Components/PostDetails';
 import { AuthProvider } from './contexts/Authcontexts';
 function App() {
   return (
@@ -74,6 +75,7 @@ function App() {
       <Route path='/getUserPosts' element={<UserPosts/>}></Route>
      <Route path='/editprofile' element={<EditProfile/>}/>
      <Route path='/add-photo' element={<Addphoto/>}/>
+     
      <Route path="/register" element={<SignUp/>}/>
     </Routes>
     </AuthProvider>

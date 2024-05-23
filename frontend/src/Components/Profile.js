@@ -27,7 +27,7 @@ function Profile() {
         setLoading(false);
       }
     };
-        console.log(userInfo.profileImage);
+        console.log(userInfo);
     fetchUserPosts();
   }, [userInfo._id]);
 
@@ -146,12 +146,15 @@ function Profile() {
                     <p className="text-sm">
                       {post.Body}
                     </p>
+                    
                     <input
                       type="text"
                       placeholder="Add a comment..."
                       className="w-full py-0.5 bg-transparent border-none rounded text-sm text-coolGray-100"
                     />
+                     
                   </div>
+                  
                 </div>
               </div>
             </div>
@@ -169,29 +172,13 @@ function Profile() {
         <div className="card">
           <div className="card-header d-flex align-items-center" style={{ backgroundColor: "#333", color: "#fff" }}>
             <div className="d-flex flex-row align-items-center">
-              {userInfo.Photo ? (
-                <img alt="" src={`data:${userInfo.PhotoType};base64,${userInfo.Photo}`}  
-                
+             
+            {profileImage && <img src={userInfo.profileimg} alt="Profile"  
                   className="img-fluid rounded-circle"
                   style={{ width: "100px", height: "100px", objectFit: "cover", border: "2px solid #fff" }}
-                />
+                />}
                
-              ) : (
-                <div
-                  style={{
-                    width: "100px",
-                    height: "100px",
-                    backgroundColor: "#ccc",
-                    borderRadius: "50%",
-                    textAlign: "center",
-                    lineHeight: "100px",
-                    color: "#666",
-                  }}
-                >
-                  No Image
-                </div>
-
-              )}
+         
              
               <div className="ms-4">
                 <h4>{userInfo.name}</h4>
