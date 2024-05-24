@@ -74,37 +74,30 @@ const getUserProfile = asyncHandler(async (req, res) => {
 });
 
 const editProfile = async (req, res) => {
-  const { email, name, phone, id ,photoEncode} = req.body; // Get parameters from request body
+  const { name, phone, id } = req.body;
+
   try {
-    let user;
-    let admin;
-    user = await User.findOne({ _id: id });
-    if(photoEncode!=null){
-      user.profileimg = Buffer.from(photoEncode, "base64");
-    }
-    if (user) {
-      user.email = email;
-      user.name = name;
-      user.phone = phone;
-      
-      await user.save();
-      return res.status(200).json({ message: "User profile updated successfully" });
-    }
-    admin = await Admin.findOne({ _id: id });
-    if (admin) {
-      admin.email = email;
-      admin.name = name;
-      admin.phone = phone;
-      await admin.save();
-      return res.status(200).json({ message: "Admin profile updated successfully" });
+    // Attempt to find the user or admin
+    let userOrAdmin = await User.findById(id) || await Admin.findById(id);
+
+    if (!userOrAdmin) {
+      return res.status(404).json({ message: "User or Admin not found" });
     }
 
-    return res.status(404).json({ message: "User or Admin not found" });
+    userOrAdmin.name = name;
+    userOrAdmin.phone = phone;
+    
+    await userOrAdmin.save();
+    
+    const role = userOrAdmin instanceof User ? "User" : "Admin";
+    return res.status(200).json({ message: `${role} profile updated successfully` });
+
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
 
 
 

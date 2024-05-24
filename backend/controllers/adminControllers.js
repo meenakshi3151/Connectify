@@ -22,9 +22,11 @@ const registerAdmin = asyncHandler(async(req,res)=>{
         res.status(400);
         throw new Error("User already exists ");
     }
-    if (photoEncode !== null) {
-    Admin.profileimg = Buffer.from(photoEncode, "base64");
-    }
+   
+    // if (photoEncode !== null) {
+    //     post.Photo = Buffer.from(photoEncode, "base64");
+    //     post.PhotoType = phototype;
+    // }
     const admin=await Admin.create({
         name,
         phone,
@@ -34,7 +36,10 @@ const registerAdmin = asyncHandler(async(req,res)=>{
         position,
         profileimg:Admin.profileimg
     });
-
+    if (photoEncode !== null) {
+        admin.profileimg = Buffer.from(photoEncode, "base64");
+        }
+        admin.save()
     if(admin){
         res.status(201).json({
             _id: admin._id,
@@ -43,7 +48,7 @@ const registerAdmin = asyncHandler(async(req,res)=>{
             phone: admin.phone,
             company: admin.company,
             position: admin.position,
-            profileimg: admin.profileimg.toString("base64"),
+            profileimg: admin.profileimg
             
           });
     }

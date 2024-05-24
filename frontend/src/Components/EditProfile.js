@@ -26,14 +26,14 @@ const EditProfile = () => {
 
   const userInfo = JSON.parse (localStorage.getItem("userInfo"));
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  // const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [status, setStatus] = useState("");
   const [files,setFiles]=useState('')
   useEffect(() => {
     
       setName(userInfo.name);
-      setEmail(userInfo.email);
+    // setEmail(userInfo.email);
       setPhone(userInfo.phone);
       setFiles(userInfo.files)
       // Assuming position is status for admins
@@ -42,7 +42,7 @@ const EditProfile = () => {
 
   const handleUserUpdate = async (e) => {
     e.preventDefault();
-    if (!email || !name || !phone  || !files) {
+    if (!name || !phone  ) {
       toast({
         title: "Please Fill all the Fields",
         status: "warning",
@@ -53,20 +53,21 @@ const EditProfile = () => {
       return;
     }
     try {
-        const photoEncode = files[0].getFileEncodeBase64String();
+       // const photoEncode = files[0].getFileEncodeBase64String();
       const config = {
         headers: {
           "Content-type": "application/json",
         },
       };
+      console.log("hi")
       const response = await axios.put(
         "http://localhost:5000/editProfile",
         {
-          email: email,
+          // email: email,
           name: name,
           phone: phone,
           id: userInfo._id,
-          photoEncode:photoEncode
+          // photoEncode:photoEncode
         },
         config
       );
@@ -81,7 +82,7 @@ const EditProfile = () => {
         });
       }
       
-      userInfo.email=email;
+    //  userInfo.email=email;
       userInfo.phone=phone;
       userInfo.name=name;
       localStorage.setItem('userInfo', JSON.stringify(userInfo));
@@ -128,22 +129,11 @@ const EditProfile = () => {
                   <h6 className="text-right">Edit Profile</h6>
                 </div>
               </div>
-              <FilePond
-        class="mb-4"
-        labelIdle="Drag & Drop your picture"
-        files={files}
-        allowMultiple={false}
-        onupdatefiles={setFiles}
-        imageResizeTargetWidth={10}
-        imageResizeTargetHeight={10}
-        acceptedFileTypes={["image/jpeg", "image/png", "images/gif"]}
-        required={true}
-    />
+            
               <div className="row mt-2">
                 <input onChange={(e) => setName(e.target.value)} value={name} placeholder="Your username" className="outline-none px-4 py-2 text-gray-500" type="text" />
               </div>
-              <div className="row mt-3">
-                <input onChange={(e) => setEmail(e.target.value)} value={email} className="outline-none px-4 py-2 text-gray-500" placeholder="Your email" type="email" />
+              
                 <div className="col-md-6"><input onChange={(e) => setPhone(e.target.value)} value={phone} className="outline-none px-4 py-2 text-gray-500" placeholder="Your phoneno" type="phone" /></div>
               </div>
               {userInfo.role === "admin" && status !== undefined &&
@@ -156,7 +146,7 @@ const EditProfile = () => {
             </div>
           </div>
         </div>
-      </div>
+  
       <div className="flex items-center space-x-4 mt-8">
         {/* <button onClick={handleUserDelete} className="text-white font-semibold bg-black px-4 py-2 hover:text-black hover:bg-gray-400">Delete</button> */}
       </div>
